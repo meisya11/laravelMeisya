@@ -34,7 +34,7 @@
 
         var rute = [];
         let marker, zoomed;
-        options = {
+        options = {ZX
             enableHighAccuracy: false,
             timeout: 5000,
             maximumAge: 0,
