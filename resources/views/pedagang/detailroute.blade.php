@@ -1,18 +1,16 @@
 @extends('layout.main')
 @section('content')
-    <div class="content-wrapper">
-        <div class="row px-3">
-            <div class="col-4 my-auto">
-                <h6>Waktu Akhir Rute</h6>
-                <h4>{{ date('d F Y h:i', strtotime($rute->expiredate)) }}</h4>
-            </div>
-
-            <div class="col-8">
-                <div id="map" style="height: 600px; weight: 100%;">
+<div class="content-wrapper">
+    <div class="row px-3">
+        <div class="col-12">
+                <button class="btn btn-success" type="button" id="done" onclick="doneRute()"> Selesaikan Rute</button>
+            <div class="col-12">
+                <div id="map" style="height: 600px; weight:100%">
                 </div>
             </div>
         </div>
     </div>
+</div>
 @section('js')
 
     <script>
@@ -27,6 +25,23 @@
         L.Routing.control({
                 waypoints: JSON.parse(rute)
             }).addTo(map);
+
+            function doneRute() {
+            $.ajax({
+                type: "PUT",
+                url: "{{ route('delete_route') }}",
+                data: {
+                    _token: '{{ csrf_token() }}',
+                    lokasi: JSON.stringify(rute)
+                    // expiredate: $('#expiredate').val()
+                },
+                dataType: "JSON",
+                success: function(response) {
+                    window.location = "/route/" + response.id;
+
+                }
+            });
+        }
 
     </script>
 @stop

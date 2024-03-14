@@ -12,12 +12,12 @@ class RouteController extends Controller
         return view('pedagang.route');
 
     }
-    function create(Request $request)
+    function createroute(Request $request)
     {
 
         $data = [
             'lokasi' => $request->lokasi,
-            'expiredate' => $request->expiredate,
+            // 'expiredate' => $request->expiredate,
             'users' => auth()->id(),
             'status' => 'jalan'
         ];
@@ -33,6 +33,19 @@ class RouteController extends Controller
         }
         ;
         // dd($request->all());
+    }
+
+    public function deleteroute(Request $request)
+    {
+        $rute = $request->id;
+        $deleteRute = Route::where('id', $rute)->delete();
+
+        if($deleteRute){
+            return response()->json([
+                'status' => 'success',
+                'message' => 'Rute berhasil dihapus'
+            ]);
+        }
     }
     public function updatestatusrute(Request $request, $id){
         $rute = Route::find($id);
