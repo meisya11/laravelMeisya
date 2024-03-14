@@ -39,6 +39,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('/store', [HomeController::class, 'store'])->name('store');
     Route::get('/editadmin/{id}', [HomeController::class, 'editadmin'])->name('editadmin');
     Route::put('/updateadmin/{id}', [HomeController::class, 'updateadmin'])->name('updateadmin');
+    Route::put('/updatestatusrute/{id}', [HomeController::class, 'deletestatusrute'])->name('deletestatusrute');
     Route::get('/upload', [PhotoController::class, 'upload1admin'])->name('upload');
     Route::post('/upload', [PhotoController::class, 'uploadadmin'])->name('upload');
     Route::delete('/delete/{id}', [HomeController::class, 'deleteadmin'])->name('deleteadmin');
@@ -69,21 +70,24 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/dashboardpedagang', [PedagangController::class, 'dashboardpedagang'])->name('dashboardpedagang');
     Route::get('/riwayatpedagang', [PedagangController::class, 'riwayatpedagang'])->name('riwayatpedagang');
     // Route::get('/rute', [PedagangController::class, 'rute'])->name('rute');
-    Route::post('save-route', [PedagangController::class, 'save.route'])->name('save.route');
+    // Route::post('save-route', [PedagangController::class, 'save.route'])->name('save.route');
     Route::get('route', [PedagangController::class, 'route'])->name('route');
     Route::get('create', [PedagangController::class, 'create'])->name('create');
     Route::get('/upload', [PhotoController::class, 'upload1pedagang'])->name('upload');
     Route::post('/upload', [PhotoController::class, 'uploadpedagang'])->name('upload');
     Route::post('/store', [PedagangController::class, 'store'])->name('store');
     Route::get('/kelola', [PedagangController::class, 'kelola'])->name('kelola');
-    Route::delete('/update/{id}', [PedagangController::class, 'deleteproduk'])->name('deleteproduk');
-    Route::post('/simpanproduk', [ProductController::class, 'simpanproduk'])->name('simpanproduk');
+    Route::delete('/updateproduk/{id}', [ProductController::class, 'deleteproduk'])->name('deleteproduk');
+    Route::post('/storeproduk', [ProductController::class, 'storeproduk'])->name('storeproduk');
+    // Route::get('/createproduk', [ProductController::class, 'createproduk'])->name('createproduk');
 
-    Route::post('/create_route', [RouteController::class, 'create'])->name('create_route');
+    Route::post('/create_route', [RouteController::class, 'createroute'])->name('create_route');
+    Route::put('/delete_route', [RouteController::class, 'deleteroute'])->name('delete_route');
     Route::get('/rute', [RouteController::class, 'index'])->name('rute');
     Route::get('/detailrute/{id}', [RouteController::class, 'detailrute'])->name('detailrute');
     Route::get('/profilePedagang', [ProfileController::class, 'profilePedagang'])->name('profilePedagang');
     Route::get('/editProfile', [ProfileController::class, 'editProfile'])->name('editProfile');
+    Route::get('/editproduk', [ProductController::class, 'editproduk'])->name('editproduk');
     Route::put('/ProfilePedagang/{id}', [ProfileController::class, 'updatepedagang'])->name('updatepedagang');
     Route::get('/updatelokasi', [HomeController::class, 'updatelokasi'])->name('updatelokasi');
     Route::get('/updatestatusrute/{id}', [RouteController::class, 'updatestatusrute'])->name('updatestatusrute');

@@ -56,13 +56,13 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($data as $d)
+                                        @foreach ($pedagang as $d)
                                         @if ($d->approval == 'approve')
                                             <tr>
                                                 <td>{{ $loop->iteration }}</td>
                                                 <td>{{ $d->id }}</td>
-                                                <td>{{ $d->pedagang->name }}</td>
-                                                <td>{{ $d->pedagang->role }}</td>
+                                                <td>{{ $d->name}}</td>
+                                                <td>{{ $d->role }}</td>
                                                 <td>{{ $d->status }}</td>
                                                 <td>
                                                     <a href="{{ route('detailrute', ['id' => $d->id]) }}"
@@ -125,12 +125,12 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            @foreach ($data as $d)
+                                            @foreach ($pedagang as $d)
                                                 @if ($d->approval == 'pending')
                                                     <tr>
                                                         <td>{{ $loop->iteration }}</td>
-                                                        <td>{{ $d->pedagang->name }}</td>
-                                                        <td>{{ $d->pedagang->role }}</td>
+                                                        <td>{{ $d->name }}</td>
+                                                        <td>{{ $d->role }}</td>
                                                         <td>{{ $d->status }}</td>
                                                         <td>
                                                             <a href="{{ route('detailrute', ['id' => $d->id]) }}"
@@ -151,7 +151,7 @@
                                                         </td>
                                                     </tr>
                                                 @endif
-                                                <div class="modal fade" id="modal-hapus{{ $d->id }}">
+                                                {{-- <div class="modal fade" id="modal-hapus{{ $d->id }}">
                                                     <div class="modal-dialog">
                                                         <div class="modal-content">
                                                             <div class="modal-header">
@@ -167,7 +167,7 @@
                                                                 </p>
                                                             </div>
                                                             <div class="modal-footer justify-content-between">
-                                                                <form action="{{ route('delete', ['id' => $d->id]) }}"
+                                                                <form action="{{ route('deletestatusrute', ['id' => $d->id]) }}"
                                                                     method="POST">
                                                                     @csrf
                                                                     @method('DELETE')
@@ -181,7 +181,7 @@
                                                         <!-- /.modal-content -->
                                                     </div>
                                                     <!-- /.modal-dialog -->
-                                                </div>
+                                                </div> --}}
                                                 <!-- /.modal -->
                                             @endforeach
                                         </tbody>

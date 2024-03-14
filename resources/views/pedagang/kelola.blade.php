@@ -24,7 +24,7 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-12">
-                        <a href="{{ route('create') }}" class="btn btn-primary mb-3">Tambah Data Produk</a>
+                        <a href="{{ route('storeproduk') }}" class="btn btn-primary mb-3">Tambah Data Produk</a>
                         <div class="card">
                             <div class="card-header">
                                 {{-- <h3 class="card-title">Responsive Hover Table</h3> --}}
@@ -50,7 +50,7 @@
                                                 <td>{{ $d->detail }}</td>
                                                 <td>
                                                     {{-- <a href="{{ route('edit', ['id'=>$d->id]) }}" class="btn btn-secondary"><i class= "fas fa-pen"></i> </a> --}}
-                                                    <a href="{{ route('edit', ['id' => $d->id]) }}" class="btn btn-primary"><i
+                                                    <a href="{{ route('editproduk', ['id' => $d->id]) }}" class="btn btn-primary"><i
                                                             class= "fas fa-pen"></i>Edit</a>
                                                     <a data-toggle="modal" data-target="#modal-hapus{{ $d->id }}"
                                                         class="btn btn-danger"><i class= "fas fa-trash-alt"></i>Hapus</a>

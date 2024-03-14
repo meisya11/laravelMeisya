@@ -3,21 +3,10 @@
     <div class="content-wrapper">
         <div class="row px-3">
             <div class="col-12">
-                {{-- <div class="mb-3">
-                    <label class="form-label" for="expiredate"> Waktu Akhir Rute</label>
-                    <input type="datetime-local" class="form-control" name="expiredate" id="expiredate">
-                </div> --}}
-
-                <div class="col-12 float-end">
                     <button class="btn btn-success" type="button" id="saveRoute" onclick="submitRute()"> Simpan
                         Rute</button>
-                    <button class="btn btn-success float-right" type="button" id="saveRoute" onclick="submitRute()"> Simpan
-                        Rute</button>
-                </div>
-
-
                 <div class="col-12">
-                    <div id="map" style="height: 800px; weight: 100%;">
+                    <div id="map" style="height: 600px; weight:100%">
                     </div>
                 </div>
             </div>
@@ -85,8 +74,8 @@
                 url: "{{ route('create_route') }}",
                 data: {
                     _token: '{{ csrf_token() }}',
-                    lokasi: JSON.stringify(rute),
-                    expiredate: $('#expiredate').val()
+                    lokasi: JSON.stringify(rute)
+                    // expiredate: $('#expiredate').val()
                 },
                 dataType: "JSON",
                 success: function(response) {

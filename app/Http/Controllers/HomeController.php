@@ -70,10 +70,10 @@ class HomeController extends Controller
 
         return view('admin.index', compact('data'));
     }
-    public function create()
-    {
-        return view('create');
-    }
+    // public function create()
+    // {
+    //     return view('create');
+    // }
 
     public function store(Request $request)
     {
@@ -103,31 +103,39 @@ class HomeController extends Controller
         return view('admin.editadmin', compact('data'));
     }
 
-    public function updateadmin(Request $request, $id)
+    // public function updateadmin(Request $request, $id)
+    // {
+    //     // dd($request->all());
+    //     $validator = Validator::make($request->all(), [
+    //         'email' => 'required|email',
+    //         'nama' => 'required',
+    //         'password' => 'nullable'
+    //         // 'role' => 'required'
+    //     ]);
+
+    //     if ($validator->fails())
+    //         return redirect()->back()->withInput()->withErrors($validator);
+
+    //     $data['name'] = $request->name;
+    //     $data['email'] = $request->email;
+
+    //     // $data['role'] = $request->role;
+
+    //     if ($request->password) {
+    //         $data['password'] = Hash::make($request->password);
+    //     }
+
+    //     User::whereId($id)->update($data);
+
+    //     return redirect()->route('index');
+    // }
+
+    public function updateadmin(Request $request, User $user)
     {
-        $validator = Validator::make($request->all(), [
-            'email' => 'required|email',
-            'nama' => 'required',
-            'password' => 'nullable',
-            // 'role' => 'required'
-        ]);
-
-        if ($validator->fails())
-            return redirect()->back()->withInput()->withErrors($validator);
-
-        $data['email'] = $request->email;
-        $data['name'] = $request->nama;
-        // $data['role'] = $request->role;
-
-        if ($request->password) {
-            $data['password'] = Hash::make($request->password);
-        }
-
-        User::whereId($id)->update($data);
-
-        return redirect()->route('admin.index');
+        // dd($request->all());
+        $user->update($request->all());
+        return redirect()->route('index')->with('success', 'Data pengguna diperbarui.');
     }
-
 
     public function deleteadmin(Request $request, $id)
     {
@@ -150,11 +158,22 @@ class HomeController extends Controller
     {
 
         $data = Route::get();
+        $pedagang = User::get();
         // $datapending = Route::with(['pedagang'])->where('approval',0)->get();
         // $dataapprove = Route::with(['pedagang'])->where('approval',1)->get();
         // $datareject = Route::with(['pedagang'])->where('approval',2)->get();
 
-        return view('admin.statusrute', compact('data'));
+        return view('admin.statusrute', compact('pedagang'));
+    }
+
+    public function deletestatusrute(Request $request, $id)
+    {
+        $pedagang = User::find($id);
+
+        if ($pedagang) {
+            $pedagang->delete();
+        }
+        return redirect()->route('index');
     }
     public function riwayatadmin()
     {
@@ -188,4 +207,5 @@ class HomeController extends Controller
             return response()->json(['message' => 'Akun tidak ditemukan.'], 404);
         }
     }
+
 }

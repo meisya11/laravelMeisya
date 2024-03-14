@@ -134,24 +134,4 @@ class PedagangController extends Controller
         return view('pedagang.kelola', compact ('data'));
     }
 
-    public function deleteproduk(Request $request, $id)
-    {
-        $data = Product::find($id);
-
-        if ($data) {
-            $data->delete();
-        }
-        return redirect()->route('kelola');
-    }
-    public function storeproduk(Request $request)
-    {
-        $data = new Product();
-        $data->nama= $request->nama;
-        $data->jumlah = $request->jumlah;
-        $data->detail = $request->detail;
-        // tambahkan data tambahan jika diperlukan
-        $data->save();
-
-        return response()->json(['message' => 'Data rute berhasil disimpan'], 200);
-    }
 }
