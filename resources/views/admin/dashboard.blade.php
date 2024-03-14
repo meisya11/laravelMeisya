@@ -88,7 +88,7 @@
         <!-- /.row -->
         <div id="map" style="height: 800px;">
 
-            <script>
+            <>
                 var pedagang = {!! $pedagang !!}
 
                 var lokasi = pedagang.map((x) => L.marker(JSON.parse(x.lokasi)).bindPopup(x.name));
@@ -237,7 +237,6 @@
                     updatelokasi();
                     lokasimap();
                 }, 2000);
-            </script>
             </script>
         </div>
         <!-- /.container-fluid -->

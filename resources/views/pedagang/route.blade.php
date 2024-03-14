@@ -24,6 +24,8 @@
         </div>
     </div>
 @section('js')
+<div class="col-12">
+    <div id="map" style="height: 800px; weight: 100%;">
 
     <script>
         var map = L.map('map').setView([-5.400219, 105.256424], 13);
@@ -34,7 +36,7 @@
 
         var rute = [];
         let marker, zoomed;
-        options = {ZX
+        options = {
             enableHighAccuracy: false,
             timeout: 5000,
             maximumAge: 0,
