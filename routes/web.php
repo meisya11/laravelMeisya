@@ -37,14 +37,14 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/index', [HomeController::class, 'index'])->name('index');
     Route::get('/create', [HomeController::class, 'create'])->name('create');
     Route::post('/store', [HomeController::class, 'store'])->name('store');
-    Route::get('/edit/{id}', [HomeController::class, 'edit'])->name('edit');
-    Route::put('/update/{id}', [HomeController::class, 'update'])->name('update');
+    Route::get('/editadmin/{id}', [HomeController::class, 'editadmin'])->name('editadmin');
+    Route::put('/updateadmin/{id}', [HomeController::class, 'updateadmin'])->name('updateadmin');
     Route::get('/upload', [PhotoController::class, 'upload1admin'])->name('upload');
     Route::post('/upload', [PhotoController::class, 'uploadadmin'])->name('upload');
-    Route::delete('/update/{id}', [HomeController::class, 'deleteadmin'])->name('delete');
+    Route::delete('/delete/{id}', [HomeController::class, 'deleteadmin'])->name('deleteadmin');
     Route::get('/profileAdmin', [ProfileController::class, 'profileAdmin'])->name('profileAdmin');
-    Route::get('/editadmin', [ProfileController::class, 'editadmin'])->name('editadmin');
-    Route::put('/ProfileAdmin/{id}', [ProfileController::class, 'updateadmin'])->name('updateadmin');
+    Route::get('/editProfileAdmin', [ProfileController::class, 'editProfileAdmin'])->name('editProfileAdmin');
+    Route::put('/ProfileAdmin/{id}', [ProfileController::class, 'updateProfileAdmin'])->name('updateprofileadmin');
     // Endpoint untuk menyetujui akun
     Route::post('/approve-user/{user}', [HomeController::class, 'approveUser'])->name('approve-user');
 

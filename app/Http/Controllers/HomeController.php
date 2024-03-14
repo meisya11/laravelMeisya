@@ -100,16 +100,16 @@ class HomeController extends Controller
     {
         $data = User::find($id);
 
-        return view('admin.edit', compact('data'));
+        return view('admin.editadmin', compact('data'));
     }
 
-    public function update(Request $request, $id)
+    public function updateadmin(Request $request, $id)
     {
         $validator = Validator::make($request->all(), [
             'email' => 'required|email',
             'nama' => 'required',
             'password' => 'nullable',
-            'role' => 'required'
+            // 'role' => 'required'
         ]);
 
         if ($validator->fails())
@@ -117,7 +117,7 @@ class HomeController extends Controller
 
         $data['email'] = $request->email;
         $data['name'] = $request->nama;
-        $data['role'] = $request->role;
+        // $data['role'] = $request->role;
 
         if ($request->password) {
             $data['password'] = Hash::make($request->password);
@@ -129,7 +129,6 @@ class HomeController extends Controller
     }
 
 
-
     public function deleteadmin(Request $request, $id)
     {
         $data = User::find($id);
@@ -137,7 +136,7 @@ class HomeController extends Controller
         if ($data) {
             $data->delete();
         }
-        return redirect()->route('admin.index');
+        return redirect()->route('index');
     }
 
     public function profiladmin()

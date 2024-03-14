@@ -6,12 +6,12 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0">Edit Profile</h1>
+            <h1 class="m-0">Edit Admin</h1>
           </div><!-- /.col -->
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active">Edit Profil</li>
+              <li class="breadcrumb-item active">Edit Admin</li>
             </ol>
           </div><!-- /.col -->
         </div><!-- /.row -->
@@ -19,7 +19,7 @@
     </div>
     <section class="content">
         <div class="container-fluid">
-            <form action=""method="POST" enctype="multipart/form-data">
+            <form action="{{ route('updateadmin',['id' => $data->id]) }}"method="POST" enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
                 <div class="row">
@@ -27,46 +27,46 @@
                       <!-- general form elements -->
                       <div class="card card-primary">
                         <div class="card-header">
-                          <h3 class="card-title">Form Edit Profile</h3>
+                          <h3 class="card-title">Form Edit ADMIN</h3>
                         </div>
                         <!-- /.card-header -->
                         <!-- form start -->
                         <form>
                           <div class="card-body">
                             <div class="form-group">
-                                <label for="exampleInputEmail1">Nama Admin</label>
-                                <input type="text" class="form-control" id="exampleInputEmail1" name="nama" value=""  placeholder="Masukkan Nama">
-                              {{-- @error('nama')
+                                <label for="exampleInputEmail1">Nama Pengguna</label>
+                                <input type="text" class="form-control" id="exampleInputEmail1" name="nama" value="{{ old('name')}}"  placeholder="">
+                              @error('name')
                                  <small>{{ $message }}</small>
-                              @enderror --}}
+                              @enderror
                            </div>
                            <div class="form-group">
-                            <label for="exampleInputEmail1">Username</label>
-                            <input type="text" class="form-control" id="exampleInputEmail1" name="Username" value=""  placeholder="Masukkan Username">
-                            {{-- @error('nama')
+                            <label for="exampleInputEmail1">Email</label>
+                            <input type="text" class="form-control" id="exampleInputEmail1" name="Username" value="{{ old('email') }}"  placeholder="">
+                            @error('email')
                               <small>{{ $message }}</small>
-                            @enderror --}}
-                            </div>
-                            <div class="form-group">
-                              <label for="exampleInputEmail1">Email</label>
-                              <input type="email" class="form-control" id="exampleInputEmail1" name="email" value="" placeholder="Masukkan email">
-                              {{-- @error('email')
-                                <small>{{ $message }}</small>
-                              @enderror --}}
+                            @enderror
                             </div>
                             <div class="form-group">
                               <label for="exampleInputEmail1">Nomor Telepon</label>
-                              <input type="number" class="form-control" id="exampleInputEmail1" name="nama" value=""  placeholder="Masukkan Nomor Telepon">
+                              <input type="phone" class="form-control" id="exampleInputEmail1" name="phone" value="{{ old('phone') }}" placeholder="">
+                              @error('phone')
+                                <small>{{ $message }}</small>
+                              @enderror
+                            </div>
+                            {{-- <div class="form-group">
+                              <label for="exampleInputEmail1">Nomor Telepon</label>
+                              <input type="number" class="form-control" id="exampleInputEmail1" name="nama" value=""  placeholder="">
                               {{-- @error('nama')
                                 <small>{{ $message }}</small>
                               @enderror --}}
-                              </div>
+                              {{-- </div> --}}
                             <div class="form-group">
                               <label for="exampleInputPassword1">Password</label>
                               <input type="password" name="password" class="form-control" id="exampleInputPassword1" placeholder=" Masukkan Password">
-                              {{-- @error('password')
+                              @error('password')
                                 <small>{{ $message }}</small>
-                              @enderror --}}
+                              @enderror
                             </div>
                           </div>
                           <!-- /.card-body -->

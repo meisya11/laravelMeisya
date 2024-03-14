@@ -19,14 +19,14 @@ class ProfileController extends Controller
     }
 
 
-    public function editadmin($userId)
+    public function editProfileAdmin($userId)
     {
         $profile = Profile::where('user_id', $userId)->firstOrFail();
 
         return view('admin.editadmin', compact('profile'));
     }
 
-    public function updateadmin(Request $request, $data)
+    public function updateprofileadmin(Request $request, $data)
     {
         $profile = Profile::where('id', $data)->firstOrFail();
 
