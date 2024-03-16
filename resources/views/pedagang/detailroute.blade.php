@@ -1,16 +1,16 @@
 @extends('layout.main')
 @section('content')
-<div class="content-wrapper">
-    <div class="row px-3">
-        <div class="col-12">
-                <button class="btn btn-success" type="button" id="done" onclick="doneRute()"> Selesaikan Rute</button>
+    <div class="content-wrapper">
+        <div class="row px-3">
             <div class="col-12">
-                <div id="map" style="height: 600px; weight:100%">
+                <button class="btn btn-success" type="button" id="done" onclick="doneRute()"> Selesaikan Rute</button>
+                <div class="col-12">
+                    <div id="map" style="height: 600px; weight:100%">
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 @section('js')
 
     <script>
@@ -23,10 +23,10 @@
         var rute = @json($rute->lokasi);
 
         L.Routing.control({
-                waypoints: JSON.parse(rute)
-            }).addTo(map);
+            waypoints: JSON.parse(rute)
+        }).addTo(map);
 
-            function doneRute() {
+        function doneRute() {
             $.ajax({
                 type: "PUT",
                 url: "{{ route('delete_route') }}",
@@ -42,7 +42,6 @@
                 }
             });
         }
-
     </script>
 @stop
 

@@ -20,7 +20,9 @@ class HomeController extends Controller
             // Menyesuaikan tampilan berdasarkan peran pengguna
             if ($role == 'admin') {
                 $pedagang = User::where('role', 'pedagang')->get();
-                return view('admin.dashboard', compact('pedagang'));
+                $rute = Route::where('status', '!=', 'selesai')->get();
+
+                return view('admin.dashboard', compact('pedagang', 'rute'));
             } elseif ($role == 'pedagang') {
 
                 $count = Route::where('users', auth()->id())->where('status', '!=', 'selesai')->count();
@@ -207,5 +209,10 @@ class HomeController extends Controller
             return response()->json(['message' => 'Akun tidak ditemukan.'], 404);
         }
     }
+    public function detailPedagang($id)
+    {
+        $user = User::find($id);
 
+        return view('component.detail_pedagang', compact('user'));
+    }
 }

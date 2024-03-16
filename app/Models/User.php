@@ -47,12 +47,20 @@ class User extends Authenticatable
         'password' => 'hashed',
     ];
 
-    function route(){
-        return $this->hasMany(Route::class,'users','id');
+    function route()
+    {
+        return $this->hasMany(Route::class, 'users', 'id');
+    }
+    function product()
+    {
+        return $this->hasMany(Product::class, 'pedagang', 'id');
+    }
+    function lastRoute()
+    {
+        return $this->hasMany(Route::class, 'users', 'id')->latest()->take(1);
     }
     public function profile()
     {
         return $this->hasOne(Profile::class);
     }
 }
-
