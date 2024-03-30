@@ -37,7 +37,7 @@
                 </div>
         </div>
         <!-- /.row -->
-        <div id="map" style="height: 400px;">
+        <div id="map" style="height: 1000px;">
 
             <script>
                 var pedagang = {!! $pedagang !!}

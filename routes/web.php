@@ -83,7 +83,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/kelola', [PedagangController::class, 'kelola'])->name('kelola');
     Route::delete('/updateproduk/{id}', [ProductController::class, 'deleteproduk'])->name('deleteproduk');
     Route::post('/storeproduk', [ProductController::class, 'storeproduk'])->name('storeproduk');
-    // Route::get('/createproduk', [ProductController::class, 'createproduk'])->name('createproduk');
+    Route::get('/createproduk', [ProductController::class, 'createproduk'])->name('createproduk');
 
     Route::post('/create_route', [RouteController::class, 'createroute'])->name('create_route');
     Route::put('/delete_route', [RouteController::class, 'deleteroute'])->name('delete_route');

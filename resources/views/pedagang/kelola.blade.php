@@ -17,19 +17,12 @@
                 </div><!-- /.row -->
             </div><!-- /.container-fluid -->
         </div>
-        <!-- /.content-header -->
-
-        <!-- Main content -->
         <section class="content">
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-12">
-                        <a href="{{ route('storeproduk') }}" class="btn btn-primary mb-3">Tambah Data Produk</a>
+                        <a href="{{ route('createproduk') }}" class="btn btn-primary mb-3">Tambah Data Produk</a>
                         <div class="card">
-                            <div class="card-header">
-                                {{-- <h3 class="card-title">Responsive Hover Table</h3> --}}
-                            </div>
-                            <!-- /.card-header -->
                             <div class="card-body table-responsive p-0">
                                 <table class="table table-hover text-nowrap">
                                     <thead>
@@ -49,7 +42,6 @@
                                                 <td>{{ $d->jumlah }}</td>
                                                 <td>{{ $d->detail }}</td>
                                                 <td>
-                                                    {{-- <a href="{{ route('edit', ['id'=>$d->id]) }}" class="btn btn-secondary"><i class= "fas fa-pen"></i> </a> --}}
                                                     <a href="{{ route('editproduk', ['id' => $d->id]) }}" class="btn btn-primary"><i
                                                             class= "fas fa-pen"></i>Edit</a>
                                                     <a data-toggle="modal" data-target="#modal-hapus{{ $d->id }}"
@@ -60,15 +52,15 @@
                                                 <div class="modal-dialog">
                                                     <div class="modal-content">
                                                         <div class="modal-header">
-                                                            <h4 class="modal-title">Default Modal</h4>
+                                                            <h4 class="modal-title">Konfirmasi Hapus</h4>
                                                             <button type="button" class="close" data-dismiss="modal"
                                                                 aria-label="Close">
                                                                 <span aria-hidden="true">&times;</span>
                                                             </button>
                                                         </div>
                                                         <div class="modal-body">
-                                                            <p>Apakah Anda yakin ingin menghapus data user
-                                                                <b>{{ $d->nama }}</b></p>
+                                                            <p>Apakah Anda yakin ingin menghapus data produk
+                                                                <b>{{ $d->nama }}</b>?</p>
                                                         </div>
                                                         <div class="modal-footer justify-content-between">
                                                             <form action="{{ route('deleteproduk', ['id' => $d->id]) }}"

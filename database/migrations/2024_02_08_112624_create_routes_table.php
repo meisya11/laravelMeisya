@@ -17,7 +17,7 @@ return new class extends Migration
             $table->dateTime('expiredate');
             $table->foreignId('users')->constrained('users','id');
             $table->enum('status',['berhenti', 'istirahat', 'jalan'])->default('berhenti');
-            $table->timestamps();
+            $table->timestamps('time');
         });
     }
 

@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>AdminLTE 3 | Register</title>
+    <title>Register</title>
 
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet"
@@ -26,7 +26,6 @@
         <div class="card">
             <div class="card-body login-card-body">
                 <p class="login-box-msg">Halaman Pendaftaran</p>
-
                 <form action="{{ route('register-proses') }}" method="post">
                     @csrf
                     <div class="input-group mb-3">
@@ -95,11 +94,9 @@
                                 <a href="{{ route('login') }}">Kembali</a>
                             </p>
                         </div>
-                        <!-- /.col -->
                     </div>
                 </form>
             </div>
-            <!-- /.login-card-body -->
         </div>
     </div>
     <!-- /.login-box -->

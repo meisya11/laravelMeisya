@@ -40,10 +40,6 @@ class PedagangController extends Controller
         // Jika tidak terotentikasi, mungkin Anda ingin menangani sesuatu di sini, seperti menampilkan halaman login.
         return redirect('/login');
     }
-    public function create()
-    {
-        return view('pedagang.create');
-    }
 
     public function storerute(Request $request)
     {
@@ -125,8 +121,8 @@ class PedagangController extends Controller
 
     public function riwayatpedagang()
     {
-
-        return view('pedagang.riwayat');
+        $data = Route::get();
+        return view('pedagang.riwayat', compact ('data'));
     }
     public function kelola()
     {

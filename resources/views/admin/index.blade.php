@@ -19,16 +19,12 @@
                 </div><!-- /.row -->
             </div><!-- /.container-fluid -->
         </div>
-        <!-- /.content-header -->
-
-        <!-- Main content -->
         <section class="content">
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-12">
                         <div class="card">
                             <div class="card-header">
-
                                 <div class="card-tools">
                                     <div class="input-group input-group-sm" style="width: 150px;">
                                         <input type="text" name="table_search" class="form-control float-right"
@@ -42,7 +38,6 @@
                                     </div>
                                 </div>
                             </div>
-                            <!-- /.card-header -->
                             <div class="card-body table-responsive p-0">
                                 <table class="table table-hover text-nowrap">
                                     <thead>
@@ -72,7 +67,7 @@
                                                 <div class="modal-dialog">
                                                     <div class="modal-content">
                                                         <div class="modal-header">
-                                                            <h4 class="modal-title">Default Modal</h4>
+                                                            <h4 class="modal-title">Konfirmasi Hapus</h4>
                                                             <button type="button" class="close" data-dismiss="modal"
                                                                 aria-label="Close">
                                                                 <span aria-hidden="true">&times;</span>
@@ -95,11 +90,8 @@
 
                                                         </div>
                                                     </div>
-                                                    <!-- /.modal-content -->
                                                 </div>
-                                                <!-- /.modal-dialog -->
                                             </div>
-                                            <!-- /.modal -->
                                         @endforeach
                                     </tbody>
                                 </table>
@@ -163,15 +155,13 @@
                 alert("Persetujuan dibatalkan.");
             }
         }
-
         function confirmRejection(userId) {
             if (confirm("Anda yakin ingin menolak akun ini?")) {
                 rejectUser(userId);
             } else {
                 alert("Penolakan dibatalkan.");
             }
-        }
-
+        }Z
         function approveUser(userId) {
             $.ajax({
                 type: "POST",
@@ -189,7 +179,6 @@
                 }
             });
         }
-
         function rejectUser(userId) {
             $.ajax({
                 type: "POST",

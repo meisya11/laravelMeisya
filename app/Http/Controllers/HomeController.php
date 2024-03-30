@@ -16,8 +16,6 @@ class HomeController extends Controller
     {
         if (auth()->check()) {
             $role = auth()->user()->role;
-
-            // Menyesuaikan tampilan berdasarkan peran pengguna
             if ($role == 'admin') {
                 $pedagang = User::where('role', 'pedagang')->get();
                 $rute = Route::where('status', '!=', 'selesai')->get();
@@ -27,7 +25,6 @@ class HomeController extends Controller
 
                 $count = Route::where('users', auth()->id())->where('status', '!=', 'selesai')->count();
                 $rute = Route::where('users', auth()->id())->where('status', '!=', 'selesai')->first();
-                // dd($rute);
                 return view('pedagang.dashboard', compact('count', 'rute'));
             } elseif ($role == 'pembeli') {
 
@@ -35,7 +32,6 @@ class HomeController extends Controller
 
                 return view('pembeli.dashboard', compact('pedagang'));
             } else {
-                // Peran lainnya, Anda dapat menyesuaikan atau menangani kasus ini sesuai kebutuhan
                 return view('dashboard');
             }
         }
@@ -72,72 +68,6 @@ class HomeController extends Controller
 
         return view('admin.index', compact('data'));
     }
-    // public function create()
-    // {
-    //     return view('create');
-    // }
-
-    public function store(Request $request)
-    {
-        $validator = Validator::make($request->all(), [
-            'email' => 'required|email',
-            'nama' => 'required',
-            'password' => 'required',
-            'role' => 'required'
-        ]);
-
-        if ($validator->fails())
-            return redirect()->back()->withInput()->withErrors($validator);
-
-        $data['email'] = $request->email;
-        $data['name'] = $request->nama;
-        $data['password'] = Hash::make($request->password);
-        $data['role'] = $request->role;
-        User::create($data);
-
-        return redirect()->route('admin.index');
-    }
-
-    public function editadmin(Request $request, $id)
-    {
-        $data = User::find($id);
-
-        return view('admin.editadmin', compact('data'));
-    }
-
-    // public function updateadmin(Request $request, $id)
-    // {
-    //     // dd($request->all());
-    //     $validator = Validator::make($request->all(), [
-    //         'email' => 'required|email',
-    //         'nama' => 'required',
-    //         'password' => 'nullable'
-    //         // 'role' => 'required'
-    //     ]);
-
-    //     if ($validator->fails())
-    //         return redirect()->back()->withInput()->withErrors($validator);
-
-    //     $data['name'] = $request->name;
-    //     $data['email'] = $request->email;
-
-    //     // $data['role'] = $request->role;
-
-    //     if ($request->password) {
-    //         $data['password'] = Hash::make($request->password);
-    //     }
-
-    //     User::whereId($id)->update($data);
-
-    //     return redirect()->route('index');
-    // }
-
-    public function updateadmin(Request $request, User $user)
-    {
-        // dd($request->all());
-        $user->update($request->all());
-        return redirect()->route('index')->with('success', 'Data pengguna diperbarui.');
-    }
 
     public function deleteadmin(Request $request, $id)
     {
@@ -147,6 +77,19 @@ class HomeController extends Controller
             $data->delete();
         }
         return redirect()->route('index');
+    }
+    public function editadmin(Request $request, $id)
+    {
+        $data = User::find($id);
+
+        return view('admin.editadmin', compact('data'));
+    }
+
+    public function updateadmin(Request $request, User $user)
+    {
+        // dd($request->all());
+        $user->update($request->all());
+        return redirect()->route('index')->with('success', 'Data pengguna diperbarui.');
     }
 
     public function profiladmin()
@@ -160,12 +103,7 @@ class HomeController extends Controller
     {
 
         $data = Route::get();
-        $pedagang = User::get();
-        // $datapending = Route::with(['pedagang'])->where('approval',0)->get();
-        // $dataapprove = Route::with(['pedagang'])->where('approval',1)->get();
-        // $datareject = Route::with(['pedagang'])->where('approval',2)->get();
-
-        return view('admin.statusrute', compact('pedagang'));
+        return view('admin.statusrute', compact('data'));
     }
 
     public function deletestatusrute(Request $request, $id)
@@ -186,7 +124,6 @@ class HomeController extends Controller
 
     public function approveUser($id)
     {
-        // Logika untuk menyetujui akun
         $user = User::find($id);
         if ($user) {
             $user->status = 'approved';
@@ -199,7 +136,6 @@ class HomeController extends Controller
 
     public function rejectUser($id)
     {
-        // Logika untuk menolak akun
         $user = User::find($id);
         if ($user) {
             $user->status = 'rejected';

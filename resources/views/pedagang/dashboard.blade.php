@@ -42,23 +42,10 @@
 
 
                             <script>
-                                // function iconClicked(iconId) {
-                                //     // Reset warna semua ikon menjadi abu-abu
-                                //     var icons = document.getElementsByClassName('traffic-icon');
-                                //     for (var i = 0; i < icons.length; i++) {
-                                //         icons[i].classList.remove('selected');
-                                //     }
-
-                                //     // Ubah warna ikon yang dipilih menjadi warna aslinya
-                                //     var selectedIcon = document.getElementById(iconId);
-                                //     selectedIcon.classList.add('selected');
-                                // }
-
                                 function iconClicked(iconId) {
                                     var selectedIcon = document.getElementById(iconId);
                                     var confirmationMessage = '';
                                     console.log(iconId)
-
                                     var status = '';
                                     switch (iconId) {
                                         case 'stopIcon':
@@ -78,8 +65,6 @@
                                             confirmationMessage = 'Apakah Anda yakin?';
                                             break;
                                     }
-
-                                    // Tampilkan pesan konfirmasi
                                     var isConfirmed = confirm(confirmationMessage);
                                     if (isConfirmed) {
 
@@ -92,8 +77,6 @@
                                             success: function (response) {
                                             }
                                         });
-
-                                        // Jika pengguna mengkonfirmasi, tambahkan kelas selected dan ubah warna ikon
                                         var icons = document.getElementsByClassName('traffic-icon');
                                         for (var i = 0; i < icons.length; i++) {
                                             icons[i].classList.remove('selected');
@@ -101,48 +84,36 @@
                                         selectedIcon.classList.add('selected');
                                     }
                                 }
-                                // Set status yang dipilih saat halaman dimuat
                                 window.onload = function() {
                                     var selectedStatus = localStorage.getItem('selectedStatus');
                                     if (selectedStatus) {
                                         document.getElementById(selectedStatus).classList.add('selected');
                                     }
                                 }
-                                // setInterval(submitRute, 1000);
                             </script>
-                        </div><!-- /.col -->
-                    </div><!-- /.row -->
-                </div><!-- /.container-fluid -->
+                        </div>
+                    </div>
+                </div>
             </div>
-            <!-- /.content-header -->
-
-            <!-- Main content -->
             <section class="content">
         </div>
-        <!-- /.row -->
+
         <div id="map" style="height: 600px;">
 
             <script>
                 const map = L.map('map');
-                // Initializes map
-
                 map.setView([51.505, -0.09], 13);
-                // Sets initial coordinates and zoom level
-
                 L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
                     maxZoom: 19,
                     attribution: '© OpenStreetMap'
                 }).addTo(map);
-                // Sets map data source and associates with map
-
-                let marker, circle, zoomed;
+                let marker, circle;
                 options = {
                     enableHighAccuracy: false,
                     timeout: 5000,
                     maximumAge: 0,
                 };
                 navigator.geolocation.watchPosition(success, error, options);
-
 
                 function success(pos) {
 
@@ -154,26 +125,15 @@
                         map.removeLayer(marker);
                         map.removeLayer(circle);
                     }
-                    // Removes any existing marker and circule (new ones about to be set)
 
                     marker = L.marker([lat, lng]).addTo(map);
                     circle = L.circle([lat, lng], {
                         radius: accuracy
                     }).addTo(map);
-                    // Adds marker to the map and a circle for accuracy
-
-                    // if (!zoomed) {
-                    //     zoomed = map.fitBounds(circle.getBounds());
-                    // }
-                    // Set zoom to boundaries of accuracy circle
-
                     map.setView([lat, lng]);
-
-                    // Set map focus to current user position
 
                     var lokasi = [lat, lng];
                     // console.log(lokasi);
-
                     $.ajax({
                         type: "get",
                         url: "{{ route('updatelokasi') }}",
@@ -188,31 +148,17 @@
                 function error(err) {
 
                     if (err.code === 1) {
-                        alert("Please allow geolocation access");
+                        alert("Hidupkan Akses Lokasi");
                     } else {
-                        alert("Cannot get current location");
+                        alert("Tidak Bisa Mendapat Lokasi Terkini");
                     }
 
                 }
             </script>
-            {{-- <script>
-                function updatelokasi(pos){
-
-                    const lat = pos.coords.latitude;
-                    const lng = pos.coords.longitude;
-                    const accuracy = pos.coords.accuracy;
-
-                    var lokasi = [lat, lng];
-                    console.log(lokasi);
-                }
-                // setInterval(function () {navigator.geolocation.watchPosition(updatelokasi, error)}, 3000);
-                navigator.geolocation.watchPosition(updatelokasi, error)
-
-            </script> --}}
         </div>
-        <!-- /.container-fluid -->
+
 
         </section>
-        <!-- /.content -->
+
     </div>
 @endsection

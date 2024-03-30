@@ -94,7 +94,6 @@
                 </div>
             </div>
         </div>
-
         <!-- /.row -->
         <div id="map" style="height: 800px;">
         </div>
@@ -171,7 +170,6 @@
 
                         return line;
                     },
-
                     createMarker: function(i, start, n) {
                         if (i == 1) {
                             return L.marker(start.latLng, {
@@ -186,10 +184,7 @@
                         }
                     }
                 }).addTo(map);
-
-
             });
-
 
             let marker, circle, zoomed;
             options = {
@@ -197,12 +192,7 @@
                 timeout: 5000,
                 maximumAge: 0,
             };
-
-
             navigator.geolocation.watchPosition(success, error, options);
-
-
-
             function success(pos) {
                 const lat = pos.coords.latitude;
                 const lng = pos.coords.longitude;
@@ -211,24 +201,18 @@
                 if (marker) {
                     map.removeLayer(marker);
                 }
-
                 marker = L.marker([lat, lng], {
                     icon: greenIcon,
                 }).addTo(map);
-
             }
-
             function error(err) {
 
                 if (err.code === 1) {
                     alert("Please allow geolocation access");
                 }
-
             }
-
             // console.log(pedagang);
             function lokasimap() {
-
                 map.removeLayer(locations)
                 lokasi = pedagang.map((x) => L.marker(JSON.parse(x.lokasi), {
                     icon: L.divIcon({
@@ -247,7 +231,6 @@
                 locations = L.layerGroup(lokasi);
                 map.addLayer(locations)
             }
-
             function updatelokasi() {
                 $.ajax({
                     type: "GET",

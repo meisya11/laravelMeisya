@@ -13,35 +13,18 @@
                             <li class="breadcrumb-item"><a href="#">Home</a></li>
                             <li class="breadcrumb-item active">Kelola Riwayat</li>
                         </ol>
-                    </div><!-- /.col -->
-                </div><!-- /.row -->
-            </div><!-- /.container-fluid -->
+                    </div>
+                </div>
+            </div>
         </div>
-        <!-- /.content-header -->
-
-        <!-- Main content -->
         <section class="content">
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-12">
                         <div class="card">
                             <div class="card-header">
-                                <h3 class="card-title">Rute Berjalan</h3>
-
-                                {{-- <div class="card-tools">
-                            <div class="input-group input-group-sm" style="width: 150px;">
-                                <input type="text" name="table_search" class="form-control float-right"
-                                    placeholder="Search">
-
-                                <div class="input-group-append">
-                                    <button type="submit" class="btn btn-default">
-                                        <i class="fas fa-search"></i>
-                                    </button>
-                                </div>
+                                <h3 class="card-title">Rute Selesai</h3>
                             </div>
-                        </div> --}}
-                            </div>
-                            <!-- /.card-header -->
                             <div class="card-body table-responsive p-0">
                                 <table class="table table-hover text-nowrap">
                                     <thead>
@@ -50,6 +33,8 @@
                                             <th>User</th>
                                             <th>Rute Dijalankan</th>
                                             <th>Status Rute</th>
+                                            <th>Tanggal</th>
+                                            <th>Persetujuan</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -64,16 +49,17 @@
                                                             Peta</a>
                                                     </td>
                                                     <td>{{ $d->status }}</td>
+                                                    <td>{{ $d->timestamps }}</td>
+                                                    <td>{{ $d->approval }}</td>
                                                 </tr>
                                             @endif
-                                            <!-- /.modal -->
                                         @endforeach
                                     </tbody>
 
                                 </table>
                             </div>
                         </div>
-                    </div><!-- /.container-fluid -->
+                    </div>
         </section>
         <!-- /.content -->
     </div>

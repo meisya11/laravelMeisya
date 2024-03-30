@@ -1,10 +1,7 @@
 @extends('auth.app')
-
 @section('content')
-
     <!DOCTYPE html>
     <html lang="en">
-
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -14,7 +11,6 @@
             integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
         <title>Login</title>
     </head>
-
     <body>
         <div class="container py-5">
             <div class="w-50 center border rounded px-3 py-3 mx-auto">
@@ -43,7 +39,6 @@
                     </div>
                 </form>
                 <div class="card">
-                    <!-- Konten lainnya di dalam card -->
                     <div class="card-body">
                         <p class="mb-3 text-center">
                             <a href="{{ route('register') }}">Belum punya akun?</a>
@@ -52,19 +47,6 @@
                 </div>
             </div>
         </div>
-        @if ($message = Session::get('success'))
-            <script>
-                Swal.fire('{{ $message }}');
-            </script>
-        @endif
-
-        @if ($message = Session::get('failed'))
-            <script>
-                Swal.fire('{{ $message }}');
-            </script>
-        @endif
     </body>
-
     </html>
-
 @endsection
