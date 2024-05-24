@@ -1,7 +1,7 @@
 @extends('layout.main')
 @section('content')
     <div class="content-wrapper">
-        <!-- Content Header (Page header) -->
+        <!-- Header Konten (Page header) -->
         <div class="content-header">
             <div class="container-fluid">
                 <div class="row mb-2">
@@ -13,7 +13,7 @@
                             <li class="breadcrumb-item"><a href="#">Home</a></li>
                             <li class="breadcrumb-item active">Status Rute</li>
                         </ol>
-                    </div>
+                    </div><!-- /.col -->
                 </div>
             </div>
         </div>
@@ -21,93 +21,84 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-12">
-                        <div class="card">
-                            <div class="card-header">
-                                <h3 class="card-title">Rute Berjalan</h3>
-                            </div>
-                            <div class="card-body table-responsive p-0">
-                                <table class="table table-hover text-nowrap">
-                                    <thead>
-                                        <tr>
-                                            <th>Id</th>
-                                            <th>User</th>
-                                            <th>Role</th>
-                                            <th>Status</th>
-                                            <th>Rute Dipilih</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        @foreach ($data as $d)
-                                        @if ($d->approval == 'approve')
-                                            <tr>
-                                                <td>{{ $d->id }}</td>
-                                                <td>{{ $d->pedagang->name}}</td>
-                                                <td>{{ $d->pedagang->role }}</td>
-                                                <td>{{ $d->status }}</td>
-                                                <td>
-                                                    <a href="{{ route('detailrute', ['id' => $d->id]) }}"
-                                                        class="btn btn-info"><i class="fas fa-map-marker-alt"></i>
-                                                        Peta</a>
-                                                </td>
-                                            </tr>
-                                            @endif
-                                        @endforeach
-                                    </tbody>
-
-                                </table>
-                            </div>
-                        </div>
-                        <div class="card">
-                            <div class="card-header">
-                                <h3 class="card-title">Rute Diajukan</h3>
-                                <div class="card-body table-responsive p-0">
-                                    <table class="table table-hover text-nowrap">
-                                        <thead>
-                                            <tr>
-                                                <th>Id</th>
-                                                <th>User</th>
-                                                <th>Role</th>
-                                                <th>Status</th>
-                                                <th>Rute Dipilih</th>
-                                                <th>Action</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            @foreach ($data as $d)
-                                                @if ($d->approval == 'pending')
-                                                    <tr>
-                                                        <td>{{ $d->id }}</td>
-                                                        <td>{{ $d->pedagang->name }}</td>
-                                                        <td>{{ $d->pedagang->role }}</td>
-                                                        <td>{{ $d->status }}</td>
-                                                        <td>
-                                                            <a href="{{ route('detailrute', ['id' => $d->id]) }}"
-                                                                class="btn btn-info"><i class="fas fa-map-marker-alt"></i>
-                                                                Peta</a>
-                                                        </td>
-                                                        <td>
-
-                                                            <button class="btn btn-success ml-1"
-                                                                onclick="confirmApproval('{{ $d->id }}')">
-                                                                Setuju
-                                                            </button>
-                                                            <button class="btn btn-danger ml-1"
-                                                                onclick="confirmRejection('{{ $d->id }}')">
-                                                                Tolak
-                                                            </button>
-
-                                                        </td>
-                                                    </tr>
-                                                @endif
-                                            @endforeach
-                                        </tbody>
-
-                                    </table>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h3 class="card-title">Rute Berjalan</h3>
+                                    </div>
+                                    <div class="card-body table-responsive p-0">
+                                        <table class="table table-hover text-nowrap">
+                                            <thead>
+                                                <tr>
+                                                    <th>Id</th>
+                                                    <th>User</th>
+                                                    <th>Rute Dipilih</th>
+                                                    <th>Status Rute</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @foreach ($data as $d)
+                                                    @if ($d->approval == 'approve')
+                                                        <tr>
+                                                            <td>{{ $d->id }}</td>
+                                                            <td>{{ $d->name }}</td>
+                                                            <td>
+                                                                <a href="{{ route('detailrute', ['id' => $d->id]) }}"
+                                                                    class="btn btn-info"><i
+                                                                        class="fas fa-map-marker-alt"></i> Peta</a>
+                                                            </td>
+                                                            <td>{{ $d->approval }}</td>
+                                                        </tr>
+                                                    @endif
+                                                @endforeach
+                                            </tbody>
+                                        </table>
+                                    </div>
                                 </div>
-
-                                <!-- /.card-body -->
                             </div>
-                            <!-- /.card -->
+                            <div class="col-md-6">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h3 class="card-title">Rute Diajukan</h3>
+                                    </div>
+                                    <div class="card-body table-responsive p-0">
+                                        <table class="table table-hover text-nowrap">
+                                            <thead>
+                                                <tr>
+                                                    <th>Id</th>
+                                                    <th>User</th>
+                                                    <th>Rute Dipilih</th>
+                                                    <th>Status Rute</th>
+                                                    <th>Action</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @foreach ($data as $d)
+                                                    @if ($d->approval == 'pending')
+                                                        <tr>
+                                                            <td>{{ $d->id }}</td>
+                                                            <td>{{ $d->name }}</td>
+                                                            <td>
+                                                                <a href="{{ route('detailrute', ['id' => $d->id]) }}"
+                                                                    class="btn btn-info"><i
+                                                                        class="fas fa-map-marker-alt"></i> Peta</a>
+                                                            </td>
+                                                            <td>{{ $d->approval }}</td>
+                                                            <td>
+                                                                <button class="btn btn-light"
+                                                                    onclick="confirmApproval('{{ $d->id }}')"> ✅</button>
+                                                                <button class="btn btn-light"
+                                                                    onclick="confirmRejection('{{ $d->id }}')">❌</button>
+                                                            </td>
+                                                        </tr>
+                                                    @endif
+                                                @endforeach
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div><!-- /.container-fluid -->
@@ -115,13 +106,6 @@
         <!-- /.content -->
     </div>
 @endsection
-<script>
-    function updateStatus(id, approval) {
-        document.querySelector(`#statusForm${id} select[name="approval"]`).value = approval;
-        document.querySelector(`#statusForm${id}`).submit();
-    }
-</script>
-
 <script>
     function confirmApproval(userId) {
         if (confirm("Anda yakin ingin menyetujui rute ini?")) {

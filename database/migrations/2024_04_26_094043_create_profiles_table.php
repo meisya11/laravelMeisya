@@ -14,9 +14,10 @@ return new class extends Migration
         Schema::create('profile', function (Blueprint $table) {
             $table->id();
             $table->string('nama')->nullable();
-            $table->string('phone')->nullable();
             $table->string('email')->unique()->nullable();
-            $table->string('foto_profil')->nullable();
+            $table->string('phone')->nullable();
+            $table->enum('role', ['admin', 'pedagang', 'pembeli'])->default('pembeli');
+            // $table->string('foto_profil')->nullable();
             $table->timestamps();
         });
     }

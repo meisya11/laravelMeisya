@@ -3,9 +3,16 @@
     <div class="content-wrapper">
         <div class="row px-3">
             <div class="col-12">
-                <button class="btn btn-success" type="button" id="done" onclick="doneRute()"> Selesaikan Rute</button>
+                <nav class="navbar bg-body-tertiary">
+                    <h5>{{ $rute->approval }}</h5>
+                    @if (Auth::user()->role == 'pedagang' && $rute->approval == 'approve')
+                        <button class="btn btn-success" type="button" id="done" onclick="doneRute()"> Selesaikan
+                            Rute</button>
+                    @endif
+                </nav>
+
                 <div class="col-12">
-                    <div id="map" style="height: 600px; weight:100%">
+                    <div id="map" style="height: 800px; weight:100%">
                     </div>
                 </div>
             </div>
@@ -25,11 +32,36 @@
         L.Routing.control({
             waypoints: JSON.parse(rute)
         }).addTo(map);
+        let marker, circle;
+        options = {
+            enableHighAccuracy: false,
+            timeout: 5000,
+            maximumAge: 0,
+        };
+        navigator.geolocation.watchPosition(success, error, options);
+
+        function success(pos) {
+
+            const lat = pos.coords.latitude;
+            const lng = pos.coords.longitude;
+            const accuracy = pos.coords.accuracy;
+
+            if (marker) {
+                map.removeLayer(marker);
+                map.removeLayer(circle);
+            }
+
+            marker = L.marker([lat, lng]).addTo(map);
+            circle = L.circle([lat, lng], {
+                radius: accuracy
+            }).addTo(map);
+            map.setView([lat, lng]);
+        }
 
         function doneRute() {
             $.ajax({
-                type: "PUT",
-                url: "{{ route('delete_route') }}",
+                type: "POST",
+                url: "{{ route('update_route', ['id' => $rute->id]) }}",
                 data: {
                     _token: '{{ csrf_token() }}',
                     lokasi: JSON.stringify(rute)
@@ -37,7 +69,7 @@
                 },
                 dataType: "JSON",
                 success: function(response) {
-                    window.location = "/route/" + response.id;
+                    window.location = "/route1/";
 
                 }
             });

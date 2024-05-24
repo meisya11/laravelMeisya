@@ -15,29 +15,25 @@ class PembeliController extends Controller
     {
         if (auth()->check()) {
             $role = auth()->user()->role;
-
-            // Menyesuaikan tampilan berdasarkan peran pengguna
             if ($role == 'admin') {
                 $pedagang = User::where('role', 'pedagang')->get();
-                return view('admin.dashboard', compact('pedagang'));
+                $rute = Route::get();
+                return view('admin.dashboard', compact('pedagang', 'rute'));
             } elseif ($role == 'pedagang') {
 
-                $count = Route::where('users', auth()->id())->where('status', '!=', 'selesai')->count();
-                $rute = Route::where('users', auth()->id())->where('status', '!=', 'selesai')->first();
-                // dd($rute);
-                return view('pedagang.dashboard', compact('count', 'rute'));
+                // $rute = Route::where('users', auth()->id())->where('status', '!=', 'selesai')->first();
+                return view('pedagang.dashboard');
             } elseif ($role == 'pembeli') {
-                $pedagang = User::where('role', 'pedagang')->get();
 
-                return view('pembeli.dashboard', compact('pedagang'));
+                $pedagang = User::where('role', 'pedagang')->get();
+                $rute = Route::get();
+
+                return view('pembeli.dashboard', compact('pedagang', 'rute'));
             } else {
-                // Peran lainnya, Anda dapat menyesuaikan atau menangani kasus ini sesuai kebutuhan
                 return view('dashboard');
             }
         }
-
-        // Jika tidak terotentikasi, mungkin Anda ingin menangani sesuatu di sini, seperti menampilkan halaman login.
-        return redirect('/login');
+        return redirect('/masuk');
     }
 
 

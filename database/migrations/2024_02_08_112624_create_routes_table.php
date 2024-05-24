@@ -14,9 +14,7 @@ return new class extends Migration
         Schema::create('routes', function (Blueprint $table) {
             $table->id();
             $table->json('lokasi');
-            $table->dateTime('expiredate');
             $table->foreignId('users')->constrained('users','id');
-            $table->enum('status',['berhenti', 'istirahat', 'jalan'])->default('berhenti');
             $table->timestamps('time');
         });
     }

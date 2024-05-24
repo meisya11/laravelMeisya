@@ -13,8 +13,8 @@ class Route extends Model
         'id',
     ];
 
-
-    function pedagang(){
-        return $this->belongsTo(User::class, 'users', 'id')->select('id', 'name', 'role');
+    function user()
+    {
+        return $this->belongsTo(User::class,'name','name');
     }
 }

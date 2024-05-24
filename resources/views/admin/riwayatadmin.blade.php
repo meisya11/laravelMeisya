@@ -31,28 +31,24 @@
                                         <tr>
                                             <th>No</th>
                                             <th>User</th>
-                                            <th>Rute Dijalankan</th>
-                                            <th>Status Rute</th>
+                                            <th>Rute Dipilih</th>
                                             <th>Tanggal</th>
                                             <th>Persetujuan</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         @foreach ($data as $d)
-                                            @if ($d->status == 'selesai'||$d->approval == 'reject')
                                                 <tr>
                                                     <td>{{ $loop->iteration }}</td>
-                                                    <td>{{ $d->pedagang->name }}</td>
+                                                    <td>{{ $d->name }}</td>
                                                     <td>
                                                         <a href="{{ route('detailrute', ['id' => $d->id]) }}"
                                                             class="btn btn-info"><i class="fas fa-map-marker-alt"></i>
                                                             Peta</a>
                                                     </td>
-                                                    <td>{{ $d->status }}</td>
-                                                    <td>{{ $d->timestamps }}</td>
+                                                    <td>{{ $d->created_at }}</td>
                                                     <td>{{ $d->approval }}</td>
                                                 </tr>
-                                            @endif
                                         @endforeach
                                     </tbody>
 

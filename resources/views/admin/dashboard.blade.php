@@ -1,90 +1,6 @@
 @extends('layout.main')
 @section('content')
     <div class="content-wrapper">
-        <!-- Content Header (Page header) -->
-        <div class="card" style="background-color: #12ACED; padding:10px;">
-            <div class="content-header">
-
-                <div class="container-fluid">
-                    <div class="row mb-2">
-                        <div class="col-sm-6">
-                            <h1 class="m-0"><b>Dashboard</b></h1>
-                        </div><!-- /.col -->
-                    </div><!-- /.row -->
-                </div><!-- /.container-fluid -->
-            </div>
-            <!-- /.content-header -->
-
-            <!-- Main content -->
-            <section class="content">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-lg-3 col-6">
-                            <!-- small box -->
-                            <div class="small-box bg-white" style="font-weight: bold;">
-                                <div class="inner">
-                                    <h4 style="display: inline-block; vertical-align: middle; margin-right: 10px;"><b>
-                                            Pedagang Aktif</b></h4>
-                                    {{-- <i class="nav-icon fa-sharp fa-solid fa-car" --}}
-                                    {{-- style="font-size: 36px; vertical-align: middle; float: right; color: #12ACED;"></i> --}}
-                                    <p style="font-size: 36px">2</p>
-                                    <a href="#" class="small-box-footer" style="color: black;"></i></a>
-
-                                </div>
-                            </div>
-                        </div>
-                        <!-- ./col -->
-                        <div class="col-lg-3 col-6">
-                            <!-- small box -->
-                            <div class="small-box bg-white" style="font-weight: bold;">
-                                <div class="inner">
-                                    <h4 style="display: inline-block; vertical-align: middle; margin-right: 10px;"><b>
-                                            Rute Diajukan</b></h4>
-                                    {{-- <i class="nav-icon fa-sharp fa-solid fa-car" --}}
-                                    {{-- style="font-size: 36px; vertical-align: middle; float: right; color: #12ACED;"></i> --}}
-                                    <p style="font-size: 36px">2</p>
-                                    <a href="#" class="small-box-footer" style="color: black;"></i></a>
-                                </div>
-                            </div>
-                        </div>
-
-
-                        <!-- ./col -->
-                        <div class="col-lg-3 col-6">
-                            <!-- small box -->
-                            <div class="small-box bg-white" style="font-weight: bold;">
-                                <div class="inner">
-                                    <h4 style="display: inline-block; vertical-align: middle; margin-right: 10px;"><b>
-                                            Pengguna Aktif</b></h4>
-                                    {{-- <i class="nav-icon fa-sharp fa-solid fa-car" --}}
-                                    {{-- style="font-size: 36px; vertical-align: middle; float: right; color: #12ACED;"></i> --}}
-                                    <p style="font-size: 36px">14</p>
-                                    <a href="#" class="small-box-footer" style="color: black;"></i></a>
-
-                                </div>
-                            </div>
-                        </div>
-                        <!-- ./col -->
-                        <div class="col-lg-3 col-6">
-                            <!-- small box -->
-                            <div class="small-box bg-white" style="font-weight: bold;">
-                                <div class="inner">
-                                    <h4 style="display: inline-block; vertical-align: middle; margin-right: 10px;"><b>
-                                            Total Akun</b></h4>
-                                    {{-- <i class="nav-icon fa-sharp fa-solid fa-car" --}}
-                                    {{-- style="font-size: 36px; vertical-align: middle; float: right; color: #12ACED;"></i> --}}
-                                    <p style="font-size: 36px">22</p>
-                                    <a href="#" class="small-box-footer" style="color: black;"></i></a>
-
-                                </div>
-                            </div>
-                        </div>
-                        <!-- ./col -->
-                    </div>
-                </div>
-            </section>
-        </div>
-        <!-- Modal -->
         <div class="modal fade" id="detailPedagang" tabindex="-1" aria-labelledby="detailPedagangLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">
@@ -105,7 +21,6 @@
                 icon: greenIcon
             });
             var rute = {!! $rute !!}
-            // console.log(pedagang)
 
             var locations = L.layerGroup(lokasi);
 
@@ -164,7 +79,7 @@
                         });
                         line.eachLayer(function(l) {
                             l.on('click', function(e) {
-                                showDetail(r.users);
+                                showDetail(r.id);
                             });
                         });
 
@@ -193,6 +108,7 @@
                 maximumAge: 0,
             };
             navigator.geolocation.watchPosition(success, error, options);
+
             function success(pos) {
                 const lat = pos.coords.latitude;
                 const lng = pos.coords.longitude;
@@ -205,6 +121,7 @@
                     icon: greenIcon,
                 }).addTo(map);
             }
+
             function error(err) {
 
                 if (err.code === 1) {
@@ -231,6 +148,7 @@
                 locations = L.layerGroup(lokasi);
                 map.addLayer(locations)
             }
+
             function updatelokasi() {
                 $.ajax({
                     type: "GET",

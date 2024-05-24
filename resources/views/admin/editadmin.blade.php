@@ -33,14 +33,14 @@
                           <div class="card-body">
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Nama Pengguna</label>
-                                <input type="text" class="form-control" id="exampleInputEmail1" name="nama" value="{{ $data->name}}"  placeholder="">
+                                <input type="text" class="form-control" id="exampleInputEmail1" name="name" value="{{ $data->name}}"  placeholder="">
                               @error('name')
                                  <small>{{ $message }}</small>
                               @enderror
                            </div>
                            <div class="form-group">
                             <label for="exampleInputEmail1">Email</label>
-                            <input type="text" class="form-control" id="exampleInputEmail1" name="Username" value="{{ $data->email}}"  placeholder="">
+                            <input type="text" class="form-control" id="exampleInputEmail1" name="email" value="{{ $data->email}}"  placeholder="">
                             @error('email')
                               <small>{{ $message }}</small>
                             @enderror

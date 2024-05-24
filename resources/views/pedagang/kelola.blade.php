@@ -31,6 +31,7 @@
                                             <th>Nama Produk</th>
                                             <th>Jumlah Produk</th>
                                             <th>Detail Produk</th>
+                                            <th>Harga Produk</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
@@ -41,6 +42,7 @@
                                                 <td>{{ $d->nama }}</td>
                                                 <td>{{ $d->jumlah }}</td>
                                                 <td>{{ $d->detail }}</td>
+                                                <td>{{ $d->harga }}</td>
                                                 <td>
                                                     <a href="{{ route('editproduk', ['id' => $d->id]) }}" class="btn btn-primary"><i
                                                             class= "fas fa-pen"></i>Edit</a>

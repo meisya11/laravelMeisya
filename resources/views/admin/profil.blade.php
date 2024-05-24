@@ -38,39 +38,19 @@
             <div class="col-lg-12">
                 <div class="card mb-4">
                     <div class="card-body">
-                        <div class="card" style="width: 18rem;">
-                            <img src="{{ asset('images/golinglogo.png') }}" class="img-thumbnail" alt="User Image">
-                            <div class="card-body">
-                              <a href="{{ route('upload')}}" class="btn btn-primary">Ubah Foto Profil</a>
-                            </div>
-                          </div>
-                        <div class="image">
-                        </div>
                         <div class="row">
                             <div class="col-sm-3">
                                 <p class="mb-0">
-                                    Nama Admin
+                                    Nama Pengguna
                                 </p>
                             </div>
                             <div class="col-sm-9">
                                 <p class="text-muted mb-0">
-                                    {{ $profile->nama }}
+                                    {{ $profile->name }}
                                 </p>
                             </div>
                         </div>
-                        {{-- <hr>
-                        <div class="row">
-                            <div class="col-sm-3">
-                                <p class="mb-0">
-                                    Username
-                                </p>
-                            </div>
-                            <div class="col-sm-9">
-                                <p class="text-muted mb-0">
-                                    {{ $profile->bio }}
-                                </p>
-                            </div>
-                        </div> --}}
+
                         <hr>
                         <div class="row">
                             <div class="col-sm-3">
@@ -80,7 +60,7 @@
                             </div>
                             <div class="col-sm-9">
                                 <p class="text-muted mb-0">
-                                      {{ $profile->user->email }}
+                                      {{ $profile->email }}
                                 </p>
                             </div>
                         </div>
@@ -106,38 +86,12 @@
                             </div>
                             <div class="col-sm-9">
                                 <p class="text-muted mb-0">
-                                    {{ $profile->user->role }}
+                                    {{ $profile->role }}
                                 </p>
                             </div>
                         </div>
-                        {{-- <hr>
-                        <div class="row">
-                            <div class="col-sm-3">
-                                <p class="mb-0">
-                                    Status Rute
-                                </p>
-                            </div>
-                            <div class="col-sm-9">
-                                <p class="text-muted mb-0">
-                                    {{-- {{ $profile->bio }} --}}
-                                {{-- </p>
-                            </div>
-                        </div>
                         <hr>
-                        <div class="row">
-                            <div class="col-sm-3">
-                                <p class="mb-0">
-                                    Produk Dagang
-                                </p>
-                            </div>
-                            <div class="col-sm-9">
-                                <p class="text-muted mb-0">
-                                    {{-- {{ $profile->lokasi  }} --}}
-                                {{-- </p>
-                            </div>
-                        </div>  --}}
-                        <hr>
-                        <a href="{{ route('editadmin')}}" class="btn btn-primary">  <i class= "fas fa-pen"></i>Edit Profil</a>
+                        <a href="{{ route('editprofiladmin',['id' => $profile->id])}}" class="btn btn-primary">  <i class= "fas fa-pen"></i>Edit Profil</a>
                     </div>
                 </div>
             </div>

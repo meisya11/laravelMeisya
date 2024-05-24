@@ -2,114 +2,140 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\Profile;
+use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Hash;
+
 
 class ProfileController extends Controller
 {
 
     public function profileAdmin()
     {
-        $userId = auth()->id(); // Mendapatkan ID pengguna yang sedang login
-        $profile = Profile::where('user_id', $userId)->first();
+        $id = auth()->id();
+        $profile = User::where('id', $id)->first();
 
         return view('admin.profil', compact('profile'));
     }
 
-
-    public function editProfileAdmin($userId)
+    public function editprofiladmin(Request $request, $id)
     {
-        $profile = Profile::where('user_id', $userId)->firstOrFail();
+        $profile = User::find($id);
+        // $profile = Profile::where('id', $id)->firstOrFail();
 
-        return view('admin.editadmin', compact('profile'));
+        return view('admin.editprofiladmin', compact('profile'));
     }
 
-    public function updateprofileadmin(Request $request, $data)
+    public function updateProfileAdmin(Request $request, $id)
     {
-        $profile = Profile::where('id', $data)->firstOrFail();
+        // Temukan profil admin berdasarkan ID
+        $profile = User::where('id', $id)->firstOrFail();
 
+        // Validasi data yang dikirimkan melalui formulir
         $request->validate([
-            'name' => 'required|string|max:255',
-            'email' => 'nullable|string|max:255|unique:profiles,email'.$profile->id,
-            'phone' => 'nullable|string|max:20',
-            'foto_profil' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'name' => 'nullable|string|max:255',
+            'email' => 'nullable|string|max:255|unique:users,email,' . $id,
+            'phone' => 'nullable|string|max:255',
+            'role' => 'nullable',
+            'password' => 'nullable|min:6',
         ]);
 
-        // Proses upload dan penyimpanan foto profil jika diperlukan
-        if ($request->hasFile('foto_profil')) {
-            $path = $request->file('foto_profil')->store('profile_images', 'public');
-            $profile->foto_profil = $path;
+        // Lakukan pembaruan data berdasarkan data yang dikirimkan melalui request
+        $profile->update($request->all());
+        // Redirect ke rute yang sesuai dengan pesan sukses
+        return redirect()->route('profileAdmin')->with('success', 'Profil admin diperbarui.');
+    }
+
+    // dd($request->all());
+
+
+    public function profilepedagang()
+    {
+        $id = auth()->id();
+        $profile = Profile::whereHas('user', function ($query) use ($id) {
+            $query->where('id', $id); })->first();
+        $user = User::get();
+
+        return view('pedagang.profil', compact('profile', 'user'));
+    }
+
+    public function editprofilpedagang(Request $request, $id)
+    {
+        $profile = Profile::find($id);
+        // $profile = Profile::where('id', $id)->firstOrFail();
+
+        return view('pedagang.editprofilpedagang', compact('profile'));
+    }
+
+    public function updateprofilepedagang(Request $request, $id)
+    {
+        // Temukan profil pedagang berdasarkan ID
+        $profile = Profile::where('id', $id)->firstOrFail();
+
+        // Validasi data yang dikirimkan melalui formulir
+        $validatedData = $request->validate([
+            'name' => 'nullable|string|max:255',
+            'email' => 'nullable|string|max:255|unique:users,email,' . $id,
+            'phone' => 'nullable|string|max:255',
+            'role' => 'nullable',
+            'password' => 'nullable|min:6',
+            'deskripsi' => 'nullable|string|max:255',
+            'jam' => 'nullable',
+            'sampai' => 'nullable',
+            'kategori' => 'nullable|string|max:50',
+        ]);
+        // dd($request->all());
+        // Lakukan pembaruan data berdasarkan data yang dikirimkan melalui request
+        // $profile->update($request->all());
+        $user = User::findOrFail($id);
+        $user->update($request->only(['name', 'email', 'phone', 'role', 'password']));
+        if ($request->password) {
+            $user->password = Hash::make($request->password);
+            $user->save();
         }
-
-        // Update kolom-kolom profil
-        $profile->update($request->only('name', 'email', 'phone'));
-
-        return redirect()->route('profilAdmin')->with('success', 'Profil berhasil diperbarui.');
+        if (empty($request->password)) {
+            unset($validatedData['password']);
+        }
+        $profile->update($request->only(['deskripsi', 'jam', 'sampai', 'kategori']));
+        // Redirect ke rute yang sesuai dengan pesan sukses
+        return redirect()->route('profilePedagang')->with('success', 'Profil pedagang diperbarui.');
     }
-    public function profilePedagang()
+    public function profilePembeli()
     {
-        $userId = auth()->id(); // Mendapatkan ID pengguna yang sedang login
-        $profile = Profile::where('user_id', $userId)->first();
+        $id = auth()->id();
+        $profile = User::where('id', $id)->first();
 
-        return view('pedagang.profil', compact('profile'));
-    }
-
-
-    public function editProfile($userId)
-    {
-        $profile = Profile::where('user_id', $userId)->firstOrFail();
-
-        return view('pedagang.editpedagang', compact('profile'));
+        return view('pembeli.profil', compact('profile'));
     }
 
-    // public function update(Request $request, $id)
-    // {
-    //     $profile = Profile::where('id', $id)->firstOrFail();
-    //     $validator = Validator::make($request->all(), [
-    //         'name' => 'required|string|max:255',
-    //         'email' => 'nullable|string|max:255|unique:email',
-    //         'phone' => 'nullable|string|max:20',
-    //         'foto_profil' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-    //     ]);
-
-    //     // Proses upload dan penyimpanan foto profil jika diperlukan
-    //     if ($request->hasFile('foto_profil')) {
-    //         $path = $request->file('foto_profil')->store('profile_images', 'public');
-    //         $profile->foto_profil = $path;
-    //     }
-    //     if ($validator->fails())
-    //     return redirect()->back()->withInput()->withErrors($validator);
-    //     $data['name'] = $request->nama;
-    //     $data['email'] = $request->email;
-    //     $data['phone'] = $request->phone;
-    //     // Update kolom-kolom profil
-    //     $profile->update($request->only('name', 'email', 'phone', 'foto_profil'));
-
-    //     return redirect()->route('profile')->with('success', 'Profil berhasil diperbarui.');
-    // }
-
-    public function updatepedagang(Request $request, $data)
+    public function editprofilpembeli(Request $request, $id)
     {
-        $profile = Profile::where('id', $data)->firstOrFail();
+        $profile = User::find($id);
+        // $profile = Profile::where('id', $id)->firstOrFail();
 
+        return view('pembeli.editprofilpembeli', compact('profile'));
+    }
+
+    public function updateProfilepembeli(Request $request, $id)
+    {
+        // Temukan profil pembeli berdasarkan ID
+        $profile = User::where('id', $id)->firstOrFail();
+
+        // Validasi data yang dikirimkan melalui formulir
         $request->validate([
-            'name' => 'required|string|max:255',
-            'email' => 'nullable|string|max:255|unique:profiles,email'.$profile->id,
-            'phone' => 'nullable|string|max:20',
-            'foto_profil' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'name' => 'nullable|string|max:255',
+            'email' => 'nullable|string|max:255|unique:users,email,' . $id,
+            'phone' => 'nullable|string|max:255',
+            'role' => 'nullable',
+            'password' => 'nullable|min:6',
         ]);
 
-        // Proses upload dan penyimpanan foto profil jika diperlukan
-        if ($request->hasFile('foto_profil')) {
-            $path = $request->file('foto_profil')->store('profile_images', 'public');
-            $profile->foto_profil = $path;
-        }
-
-        // Update kolom-kolom profil
-        $profile->update($request->only('name', 'email', 'phone'));
-
-        return redirect()->route('profilPedagang')->with('success', 'Profil berhasil diperbarui.');
+        // Lakukan pembaruan data berdasarkan data yang dikirimkan melalui request
+        $profile->update($request->all());
+        // Redirect ke rute yang sesuai dengan pesan sukses
+        return redirect()->route('profilePembeli')->with('success', 'Profil pembeli diperbarui.');
     }
+
 }

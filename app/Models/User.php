@@ -51,6 +51,10 @@ class User extends Authenticatable
     {
         return $this->hasMany(Route::class, 'users', 'id');
     }
+    function user()
+    {
+        return $this->hasMany(Route::class, 'name', 'name');
+    }
     function product()
     {
         return $this->hasMany(Product::class, 'pedagang', 'id');
@@ -59,8 +63,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(Route::class, 'users', 'id')->latest()->take(1);
     }
-    public function profile()
+
+     function profile()
     {
-        return $this->hasOne(Profile::class);
+        return $this->hasOne(Profile::class,'user_id','id');
     }
 }

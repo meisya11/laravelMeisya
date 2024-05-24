@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Monitoring;
+use App\Models\Profile;
 use App\Models\User;
 use App\Models\Route;
 use Illuminate\Http\Request;
@@ -18,26 +19,22 @@ class HomeController extends Controller
             $role = auth()->user()->role;
             if ($role == 'admin') {
                 $pedagang = User::where('role', 'pedagang')->get();
-                $rute = Route::where('status', '!=', 'selesai')->get();
-
+                $rute = Route::get();
                 return view('admin.dashboard', compact('pedagang', 'rute'));
             } elseif ($role == 'pedagang') {
 
-                $count = Route::where('users', auth()->id())->where('status', '!=', 'selesai')->count();
-                $rute = Route::where('users', auth()->id())->where('status', '!=', 'selesai')->first();
-                return view('pedagang.dashboard', compact('count', 'rute'));
+                return view('pedagang.dashboard');
             } elseif ($role == 'pembeli') {
 
                 $pedagang = User::where('role', 'pedagang')->get();
+                $rute = Route::get();
 
-                return view('pembeli.dashboard', compact('pedagang'));
+                return view('pembeli.dashboard', compact('pedagang', 'rute'));
             } else {
                 return view('dashboard');
             }
         }
-
-        // Jika tidak terotentikasi, mungkin Anda ingin menangani sesuatu di sini, seperti menampilkan halaman login.
-        return redirect('/login');
+        return redirect('/masuk');
     }
 
     public function updatelokasi(Request $request)
@@ -59,16 +56,12 @@ class HomeController extends Controller
         $pedagang = User::where('role', 'pedagang')->get();
         return response()->json($pedagang);
     }
-
-
     public function index()
     {
-
         $data = User::get();
 
         return view('admin.index', compact('data'));
     }
-
     public function deleteadmin(Request $request, $id)
     {
         $data = User::find($id);
@@ -85,27 +78,28 @@ class HomeController extends Controller
         return view('admin.editadmin', compact('data'));
     }
 
-    public function updateadmin(Request $request, User $user)
+    public function updateadmin(Request $request, $id)
     {
         // dd($request->all());
-        $user->update($request->all());
+
+        $data = User::where('id', $id)->firstOrFail();
+
+        $request->validate([
+            'nama' => 'nullable|string|max:255',
+            'email' => 'nullable|string|max:255|unique:users,email,' . $id,
+            'phone' => 'nullable|string|max:255',
+            'password' => 'nullable|min:6',
+
+        ]);
+        $data->update($request->all());
         return redirect()->route('index')->with('success', 'Data pengguna diperbarui.');
     }
-
-    public function profiladmin()
-    {
-        $data = User::get();
-
-        return view('admin.profil', compact('data'));
-    }
-
     public function statusrute()
     {
 
         $data = Route::get();
         return view('admin.statusrute', compact('data'));
     }
-
     public function deletestatusrute(Request $request, $id)
     {
         $pedagang = User::find($id);
@@ -121,7 +115,6 @@ class HomeController extends Controller
 
         return view('admin.riwayatadmin', compact('data'));
     }
-
     public function approveUser($id)
     {
         $user = User::find($id);
@@ -148,7 +141,32 @@ class HomeController extends Controller
     public function detailPedagang($id)
     {
         $user = User::find($id);
+        $profile = Profile::find($id);
+        $data = Route::get();
 
-        return view('component.detail_pedagang', compact('user'));
+        return view('component.detail_pedagang', compact('user','profile', 'data'));
     }
+    function approveRoute($id)
+    {
+        $rute = Route::find($id);
+        if ($rute) {
+            $rute->approval = 'approve';
+            $rute->save();
+            return response()->json(['message' => 'Rute disetujui.']);
+        } else {
+            return response()->json(['message' => 'Rute tidak ditemukan.'], 404);
+        }
+    }
+    function rejectRoute($id)
+    {
+        $rute = Route::find($id);
+        if ($rute) {
+            $rute->approval = 'reject';
+            $rute->save();
+            return response()->json(['message' => 'Rute disetujui.']);
+        } else {
+            return response()->json(['message' => 'Rute tidak ditemukan.'], 404);
+        }
+    }
+
 }

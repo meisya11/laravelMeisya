@@ -11,7 +11,7 @@
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active">Profil User</li>
+              <li class="breadcrumb-item active">Profil Pembeli</li>
             </ol>
           </div><!-- /.col -->
         </div><!-- /.row -->
@@ -46,20 +46,7 @@
                             </div>
                             <div class="col-sm-9">
                                 <p class="text-muted mb-0">
-                                    {{-- {{ $profile->bio }} --}}
-                                </p>
-                            </div>
-                        </div>
-                        <hr>
-                        <div class="row">
-                            <div class="col-sm-3">
-                                <p class="mb-0">
-                                    Username
-                                </p>
-                            </div>
-                            <div class="col-sm-9">
-                                <p class="text-muted mb-0">
-                                    {{-- {{ $profile->bio }} --}}
+                                    {{ $profile->name }}
                                 </p>
                             </div>
                         </div>
@@ -72,7 +59,7 @@
                             </div>
                             <div class="col-sm-9">
                                 <p class="text-muted mb-0">
-                                    {{-- {{ $profile->user->role }} --}}
+                                    {{ $profile->email }}
                                 </p>
                             </div>
                         </div>
@@ -85,7 +72,7 @@
                             </div>
                             <div class="col-sm-9">
                                 <p class="text-muted mb-0">
-                                    {{-- {{ $profile->phone }} --}}
+                                    {{ $profile->phone }}
                                 </p>
                             </div>
                         </div>
@@ -98,38 +85,12 @@
                             </div>
                             <div class="col-sm-9">
                                 <p class="text-muted mb-0">
-                                    {{-- {{ $profile->user->email }} --}}
+                                    {{ $profile->role }}
                                 </p>
                             </div>
                         </div>
                         <hr>
-                        <div class="row">
-                            <div class="col-sm-3">
-                                <p class="mb-0">
-                                    Riwayat Pencarian
-                                </p>
-                            </div>
-                            <div class="col-sm-9">
-                                <p class="text-muted mb-0">
-                                    {{-- {{ $profile->bio }} --}}
-                                </p>
-                            </div>
-                        </div>
-                        {{-- <hr>
-                        <div class="row">
-                            <div class="col-sm-3">
-                                <p class="mb-0">
-                                    Produk Dagang
-                                </p>
-                            </div>
-                            <div class="col-sm-9">
-                                <p class="text-muted mb-0">
-                                    {{-- {{ $profile->lokasi  }} --}}
-                                {{--</p>
-                            </div>
-                        </div> --}}
-                        <hr>
-                        <a href="" class="btn btn-primary">  <i class= "fas fa-pen"></i>Edit Profil</a>
+                        <a href="{{ route('editprofilpembeli',['id' => $profile->id])}}" class="btn btn-primary">  <i class= "fas fa-pen"></i>Edit Profil</a>
                     </div>
                 </div>
             </div>

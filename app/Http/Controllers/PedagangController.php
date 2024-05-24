@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use App\Models\Route;
 use App\Models\Product;
+use Carbon\Carbon;
 
 class PedagangController extends Controller
 {
@@ -15,30 +16,25 @@ class PedagangController extends Controller
     {
         if (auth()->check()) {
             $role = auth()->user()->role;
-
-            // Menyesuaikan tampilan berdasarkan peran pengguna
             if ($role == 'admin') {
                 $pedagang = User::where('role', 'pedagang')->get();
-                return view('admin.dashboard', compact('pedagang'));
+                $rute = Route::get();
+                return view('admin.dashboard', compact('pedagang', 'rute'));
             } elseif ($role == 'pedagang') {
 
-                $count = Route::where('users', auth()->id())->where('status', '!=', 'selesai')->count();
-                $rute = Route::where('users', auth()->id())->where('status', '!=', 'selesai')->first();
-                // dd($rute);
-                return view('pedagang.dashboard', compact('count', 'rute'));
+                // $rute = Route::where('users', auth()->id())->where('status', '!=', 'selesai')->first();
+                return view('pedagang.dashboard');
             } elseif ($role == 'pembeli') {
 
                 $pedagang = User::where('role', 'pedagang')->get();
+                $rute = Route::get();
 
-                return view('pembeli.dashboard', compact('pedagang'));
+                return view('pembeli.dashboard', compact('pedagang', 'rute'));
             } else {
-                // Peran lainnya, Anda dapat menyesuaikan atau menangani kasus ini sesuai kebutuhan
                 return view('dashboard');
             }
         }
-
-        // Jika tidak terotentikasi, mungkin Anda ingin menangani sesuatu di sini, seperti menampilkan halaman login.
-        return redirect('/login');
+        return redirect('/masuk');
     }
 
     public function storerute(Request $request)
@@ -51,44 +47,15 @@ class PedagangController extends Controller
 
         return response()->json(['message' => 'Data rute berhasil disimpan'], 200);
     }
-    // public function store(Request $request)
-    // {
-    //     $validator = Validator::make($request->all(), [
-    //         'nama' => 'required',
-    //         'jumlah' => 'required',
-    //         'detail' => 'required',
-    //     ]);
 
-    //     if ($validator->fails())
-    //         return redirect()->back()->withInput()->withErrors($validator);
-
-    //     $data['nama'] = $request->nama;
-    //     $data['jumlah'] = $request->jumlah;
-    //     $data['detail'] = $request->detail;
-    //     Product::create($data);
-
-    //     return redirect()->route('pedagang.kelola');
-    // }
-
-    public function rute()
+    public function route1()
     {
-        return view('pedagang.rute');
+        return view('pedagang.route');
     }
     public function route()
     {
         $routes = Route::all();
         return response()->json($routes);
-    }
-    public function editpedagang(Request $request, $id)
-    {
-        $data = User::find($id);
-
-        return view('pedagang.edit', compact('data'));
-    }
-    public function profilpedagang()
-    {
-        $data = User::get();
-        return view('pedagang.profil', compact ('data'));
     }
 
     public function update(Request $request, $id)
@@ -121,12 +88,12 @@ class PedagangController extends Controller
 
     public function riwayatpedagang()
     {
-        $data = Route::get();
+        $data = Route::where('users', auth()->id())->get();
         return view('pedagang.riwayat', compact ('data'));
     }
     public function kelola()
     {
-        $data = Product::get();
+        $data = Product::where('pedagang', auth()->id())->get();
         return view('pedagang.kelola', compact ('data'));
     }
 

@@ -31,12 +31,12 @@
     <link rel="stylesheet" href="{{ asset('lte/plugins/summernote/summernote-bs4.min.css') }}">
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
         integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
-    <link rel="stylesheet" href="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.css" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet-routing-machine@3.2.12/dist/leaflet-routing-machine.css" />
     <script src="https://code.jquery.com/jquery-3.7.0.js" integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM="
         crossorigin="anonymous"></script>
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
         integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
-    <script src="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.js"></script>
+    <script src="https://unpkg.com/leaflet-routing-machine@3.2.12/dist/leaflet-routing-machine.js"></script>
 
 </head>
 
@@ -62,45 +62,27 @@
             <!-- Right navbar links -->
             <ul class="navbar-nav ml-auto">
                 <!-- Navbar Search -->
-                <li class="nav-item">
-                    <a class="nav-link" data-widget="navbar-search" href="#" role="button">
-                        <i class="fas fa-search"></i>
-                    </a>
-                    <div class="navbar-search-block">
-                        <form class="form-inline">
-                            <div class="input-group input-group-sm">
-                                <input class="form-control form-control-navbar" type="search" placeholder="Search"
-                                    aria-label="Search">
-                                <div class="input-group-append">
-                                    <button class="btn btn-navbar" type="submit">
-                                        <i class="fas fa-search"></i>
-                                    </button>
-                                    <button class="btn btn-navbar" type="button" data-widget="navbar-search">
-                                        <i class="fas fa-times"></i>
-                                    </button>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                </li>
+
                 @if (Auth::user()->role == 'admin')
                     <li class="user-panel d-flex">
                         <div class="image">
-                            <a href="{{ route('profileAdmin') }}"> <!-- Ganti 'route('profile')' dengan route yang sesuai -->
+                            <a href="{{ route('profileAdmin') }}">
+                                <!-- Ganti 'route('profile')' dengan route yang sesuai -->
                                 <img src="{{ asset('images/golinglogo.png') }}"
                                     class="brand-image img-circle elevation-3" style="opacity: .8">
                             @elseif (Auth::user()->role == 'pedagang')
                     <li class="user-panel d-flex">
                         <div class="image">
-                            <a href="{{ route('profilePedagang') }}"> <!-- Ganti 'route('profile')' dengan route yang sesuai -->
+                            <a href="{{ route('profilePedagang') }}">
+                                <!-- Ganti 'route('profile')' dengan route yang sesuai -->
                                 <img src="{{ asset('images/golinglogo.png') }}"
                                     class="brand-image img-circle elevation-3" style="opacity: .8">
                             @elseif (Auth::user()->role == 'pembeli')
                     <li class="user-panel d-flex">
                         <div class="image">
-                            {{-- <a href="{{ route('profilePembeli') }}"> <!-- Ganti 'route('profile')' dengan route yang sesuai --> --}}
-                                <img src="{{ asset('images/golinglogo.png') }}"
-                                    class="brand-image img-circle elevation-3" style="opacity: .8">
+                            <a href="{{ route('profilePembeli') }}">
+                            <img src="{{ asset('images/golinglogo.png') }}" class="brand-image img-circle elevation-3"
+                                style="opacity: .8">
                             </a>
                         </div>
                 @endif
@@ -121,31 +103,6 @@
 
             <!-- Sidebar -->
             <div class="sidebar">
-                {{-- <!-- Sidebar user panel (optional) -->
-                <div class="user-panel mt-3 pb-3 mb-3 d-flex">
-                    <div class="image">
-                        <img src="{{ asset('images/golinglogo.png') }}" class="img-circle elevation-2"
-                            alt="User Image">
-                    </div>
-                    <div class="info">
-                        <a href="{{ route('profil') }}" class="d-block">ZOIN</a>
-                    </div>
-                </div>
-
-                <!-- SidebarSearch Form -->
-                <div class="form-inline">
-                    <div class="input-group" data-widget="sidebar-search">
-                        <input class="form-control form-control-sidebar" type="search" placeholder="Search"
-                            aria-label="Search">
-                        <div class="input-group-append">
-                            <button class="btn btn-sidebar">
-                                <i class="fas fa-search fa-fw"></i>
-                            </button>
-                        </div>
-                    </div>
-                </div> --}}
-
-                <!-- Sidebar Menu -->
                 @if (Auth::user()->role == 'admin')
                     <nav class="mt-2">
                         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"

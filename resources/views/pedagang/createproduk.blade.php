@@ -28,76 +28,50 @@
                                 <div class="card-header">
                                     <h3 class="card-title">Form Tambah Data Produk</h3>
                                 </div>
-                                <!-- /.card-header -->
-                                <!-- form start -->
 
                                 <div class="card-body">
-                                    {{-- <div class="form-group">
-                                <label for="exampleInputEmail1">Photo Profil</label>
-                                <input type="file" class="form-control" id="exampleInputEmail1" name="photo"
-                                @error('photo')
-                                  <small>{{ $message }}</small>
-                                @enderror
-                              </div> --}}
-                                    <div class="card" style="width: 18rem;">
-                                        <img src="{{ asset('images/golinglogo.png') }}" class="img-thumbnail"
-                                            alt="User Image">
-                                        <div class="card-body">
-                                            <a href="{{ route('upload') }}" class="btn btn-primary">Tambah Foto Produk</a>
-                                        </div>
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1">Nama Produk</label>
+                                        <input type="text" class="form-control" id="exampleInputEmail1"
+                                            name="nama"placeholder="Masukkan Nama Produk">
+                                        @error('nama')
+                                            <small>{{ $message }}</small>
+                                        @enderror
                                     </div>
-                                    <div class="image">
+                                    <label for="number">Masukkan Jumlah Produk:</label>
+                                    <input type="number" id="number" class="form-control" name="jumlah" required>
+                                    <script>
+                                        function add() {
+                                            var numberInput = document.getElementById("number");
+                                            var currentValue = parseInt(numberInput.value) || 0;
+                                            numberInput.value = currentValue + 1;
+                                        }
+
+                                        function subtract() {
+                                            var numberInput = document.getElementById("number");
+                                            var currentValue = parseInt(numberInput.value) || 0;
+                                            numberInput.value = currentValue - 1;
+                                        }
+                                    </script>
+
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1">Detail Produk</label>
+                                        <input type="text" class="form-control" id="exampleInputEmail1"
+                                            name="detail"placeholder="Masukkan Detail Produk">
                                     </div>
-                                    <form method="POST" action="{{ route('simpanproduk') }}">
-                                        @csrf
-                                        <div class="form-group">
-                                            <label for="exampleInputEmail1">Nama Produk</label>
-                                            <input type="text" class="form-control" id="exampleInputEmail1"
-                                                name="nama"placeholder="Masukkan Nama Produk">
-                                            @error('nama')
-                                                <small>{{ $message }}</small>
-                                            @enderror
-                                        </div>
-                                        <label for="number">Masukkan Jumlah Produk:</label>
-                                        <input type="number" id="number" class="form-control" name="jumlah" required>
-                                        {{-- <button type="button" onclick="add()">+</button>
-                                                <button type="button" onclick="subtract()">-</button> --}}
-
-                                        <script>
-                                            function add() {
-                                                var numberInput = document.getElementById("number");
-                                                var currentValue = parseInt(numberInput.value) || 0;
-                                                numberInput.value = currentValue + 1;
-                                            }
-
-                                            function subtract() {
-                                                var numberInput = document.getElementById("number");
-                                                var currentValue = parseInt(numberInput.value) || 0;
-                                                numberInput.value = currentValue - 1;
-                                            }
-                                        </script>
-                                        {{-- @error('email')
-                                                <small>{{ $message }}</small>
-                                            @enderror --}}
-                                        <div class="form-group">
-                                            <label for="exampleInputEmail1">Detail Produk</label>
-                                            <input type="text" class="form-control" id="exampleInputEmail1"
-                                                name="detail"placeholder="Masukkan Detail Produk">
-                                            {{-- @error('password')
-                                                <small>{{ $message }}</small>
-                                            @enderror --}}
-                                            <!-- /.card-body -->
-
-                                            <div class="card-footer">
-                                                <button type="submit" class="btn btn-primary">Submit</button>
-                                            </div>
-                                        </div>
-                                    </form>
-                                </div>
-                                <!-- /.card -->
-                            </div>
-                            <!--/.col (left) -->
-                        </div><!-- /.container-fluid -->
-        </section>
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1">Harga Produk</label>
+                                        <input type="text" class="form-control" id="exampleInputEmail1"
+                                            name="harga"placeholder="Masukkan Harga Produk">
+                                    <div class="card-footer">
+                                        <button type="submit" class="btn btn-primary">Submit</button>
+                                    </div>
+                </form>
+            </div>
+            <!-- /.card -->
+    </div>
+    <!--/.col (left) -->
+    </div><!-- /.container-fluid -->
+    </section>
     </div>
 @endsection
