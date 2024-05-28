@@ -58,8 +58,6 @@ class ProductController extends Controller
         ];
 
         Product::create($productData);
-
-        // Redirect ke rute 'kelola' setelah berhasil menyimpan produk
         return redirect()->route('kelola');
     }
 

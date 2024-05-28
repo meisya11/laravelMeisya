@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Profile;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -99,6 +100,9 @@ class LoginController extends Controller
         $data['status'] = 'pending';
         $data['role'] = $request->role;
         $user = User::create($data);
+        $profile = new Profile();
+        $profile->user_id = $user->id;
+        $profile->save();
 
         if ($user) {
             return redirect()->route('masuk')->with('success', 'Registrasi berhasil. Menunggu persetujuan admin.');

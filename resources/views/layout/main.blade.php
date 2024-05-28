@@ -161,13 +161,13 @@
                             </li>
                             <li class="nav-item">
                                 <a href="{{ route('kelola') }}" class="nav-link">
-                                    <iconify-icon icon="mdi:location"></iconify-icon>
+                                    <iconify-icon icon="tabler:checkup-list"></iconify-icon>
                                     <p>Informasi Produk</p>
                                 </a>
                             </li>
                             <li class="nav-item">
                                 <a href="{{ route('rute') }}" class="nav-link">
-                                    <iconify-icon icon="tabler:checkup-list"></iconify-icon>
+                                    <iconify-icon icon="mdi:location"></iconify-icon>
                                     <p>Rute</p>
                                 </a>
                             </li>
@@ -199,18 +199,6 @@
                                     </p>
                                 </a>
                             </li>
-                            {{-- <li class="nav-item">
-                                <a href="{{ route('kelola') }}" class="nav-link">
-                                    <iconify-icon icon="mdi:location"></iconify-icon>
-                                    <p>Kelola Akun</p>
-                                </a>
-                            </li> --}}
-                            {{-- <li class="nav-item">
-                                <a href="{{ route('riwayatpembeli') }}" class="nav-link">
-                                    <iconify-icon icon="tabler:checkup-list"></iconify-icon>
-                                    <p>Riwayat Pencarian</p>
-                                </a>
-                            </li> --}}
                             <li class="nav-item">
                                 <a href="{{ route('logout') }}" class="nav-link">
                                     <i class="fa-solid fa-right-from-bracket"></i>
@@ -225,34 +213,17 @@
             <!-- /.sidebar -->
         </aside>
 
-        <!-- Content Wrapper. Contains page content -->
+
         @yield('content')
-        <!-- /.content-wrapper -->
-        {{-- <footer class="main-footer">
-            <strong>Copyright &copy; 2014-2021 <a href="https://adminlte.io">AdminLTE.io</a>.</strong>
-            All rights reserved.
-            <div class="float-right d-none d-sm-inline-block">
-                <b>Version</b> 3.2.0
-            </div>
-        </footer> --}}
-
-        <!-- Control Sidebar -->
         <aside class="control-sidebar control-sidebar-dark">
-            <!-- Control sidebar content goes here -->
         </aside>
-        <!-- /.control-sidebar -->
     </div>
-    <!-- ./wrapper -->
 
-    <!-- jQuery -->
     <script src="{{ asset('lte/plugins/jquery/jquery.min.js') }}"></script>
-    <!-- jQuery UI 1.11.4 -->
     <script src="{{ asset('lte/plugins/jquery-ui/jquery-ui.min.js') }}"></script>
-    <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
     <script>
         $.widget.bridge('uibutton', $.ui.button)
     </script>
-    <!-- Bootstrap 4 -->
     <script src="{{ asset('lte/plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
     <!-- ChartJS -->
     <script src="{{ asset('lte/plugins/chart.js/Chart.min.js') }}"></script>
