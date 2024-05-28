@@ -52,7 +52,7 @@
             });
 
             L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                maxZoom: 20, // Anda bisa menyesuaikan maxZoom sesuai kebutuhan
+                maxZoom: 20,
                 attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
             }).addTo(map);
 
@@ -128,7 +128,6 @@
                     alert("Please allow geolocation access");
                 }
             }
-            // console.log(pedagang);
             function lokasimap() {
                 map.removeLayer(locations)
                 lokasi = pedagang.map((x) => L.marker(JSON.parse(x.lokasi), {

@@ -18,7 +18,7 @@ class HomeController extends Controller
         if (auth()->check()) {
             $role = auth()->user()->role;
             if ($role == 'admin') {
-                $pedagang = User::where('role', 'pedagang')->get();
+                $pedagang = User::where('role', 'pedagang')->whereNotNull('lokasi')->get();
                 $rute = Route::get();
                 return view('admin.dashboard', compact('pedagang', 'rute'));
             } elseif ($role == 'pedagang') {
@@ -26,7 +26,7 @@ class HomeController extends Controller
                 return view('pedagang.dashboard');
             } elseif ($role == 'pembeli') {
 
-                $pedagang = User::where('role', 'pedagang')->get();
+                $pedagang = User::where('role', 'pedagang')->whereNotNull('lokasi')->get();
                 $rute = Route::get();
 
                 return view('pembeli.dashboard', compact('pedagang', 'rute'));

@@ -65,7 +65,6 @@
             </div>
         </div>
     </div>
-    <!-- /.row -->
     <div id="map" style="height: 800px;">
 
         <script>
@@ -76,7 +75,6 @@
                 icon: greenIcon
             });
             var rute = {!! $rute !!}
-            // console.log(pedagang)
 
             var locations = L.layerGroup(lokasi);
 

@@ -19,7 +19,7 @@ class LoginController extends Controller
     }
     public function awal()
     {
-        $pedagang = User::where('role', 'pedagang')->get();
+        $pedagang = User::where('role', 'pedagang')->whereNotNull('lokasi')->get();
         $rute = Route::get();
         return view('auth.awal', compact('pedagang', 'rute'));
     }
@@ -35,24 +35,18 @@ class LoginController extends Controller
             'password' => $request->password
         ];
         if (Auth::attempt($data)) {
-            // Jika berhasil login, cek status dan peran (role) pengguna
             $user = Auth::user();
 
             if ($user->status == 'approved') {
-                // Jika status akun adalah 'approved'
                 if ($user->role == 'admin') {
 
-                    $pedagang = User::where('role', 'pedagang')->get();
+                    $pedagang = User::where('role', 'pedagang')->whereNotNull('lokasi')->get();
                     $rute = Route::get();
                     $count = User::where('id')->count();
 
                     return redirect()->route('dashboard', compact('pedagang', 'rute', 'count'));
                 } elseif ($user->role == 'pedagang') {
-
-
-                    // $rute = Route::where('users', auth()->id())->where('status', '!=', 'selesai')->first();
                     return redirect()->route('dashboardpedagang');
-
                 } elseif ($user->role == 'pembeli') {
 
                     $pedagang = User::where('role', 'pedagang')->get();
@@ -60,7 +54,6 @@ class LoginController extends Controller
                     return redirect()->route('dashboardpembeli', compact('pedagang', 'rute'));
                 }
             } elseif ($user->status == 'pending') {
-                // Jika status akun tidak diapproved, logout dan kembali ke halaman login
                 Auth::logout();
                 return redirect()->route('masuk')->with('failed', 'Akun Anda belum diapproved oleh admin.');
             } else {
@@ -71,7 +64,6 @@ class LoginController extends Controller
         return redirect()->route('masuk')->with('failed', 'Email atau Password Salah');
 
     }
-
     public function logout()
     {
         Auth::logout();
