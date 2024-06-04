@@ -8,6 +8,7 @@ use App\Http\Controllers\PhotoController;
 use App\Http\Controllers\RouteController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProductController;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -27,7 +28,13 @@ Route::post('/login-proses', [LoginController::class, 'login_proses'])->name('lo
 Route::get('/register', [LoginController::class, 'register'])->name('register');
 Route::post('/register-proses', [LoginController::class, 'register_proses'])->name('register-proses');
 Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
+<<<<<<< HEAD
 Route::get('/detailpedagang/{id}', [HomeController::class, 'detailPedagang'])->name('detail-pedagang');
+=======
+Route::get('/foo', function () {
+    Artisan::call('storage:link');
+});
+>>>>>>> 33789fb99c5bcc7e953d9b76da0a1e67a42c80e6
 
 //ADMIN//
 
