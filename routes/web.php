@@ -27,7 +27,7 @@ Route::post('/login-proses', [LoginController::class, 'login_proses'])->name('lo
 Route::get('/register', [LoginController::class, 'register'])->name('register');
 Route::post('/register-proses', [LoginController::class, 'register_proses'])->name('register-proses');
 Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
-
+Route::get('/detailpedagang/{id}', [HomeController::class, 'detailPedagang'])->name('detail-pedagang');
 
 //ADMIN//
 
@@ -37,7 +37,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/rute', [PedagangController::class, 'rute'])->name('rute');
 
     Route::get('/dashboard', [HomeController::class, 'dashboard'])->name('dashboard');
-    Route::get('/detailpedagang/{id}', [HomeController::class, 'detailPedagang'])->name('detail-pedagang');
+
     Route::get('/statusrute', [HomeController::class, 'statusrute'])->name('statusrute');
     Route::get('/riwayatadmin', [HomeController::class, 'riwayatadmin'])->name('riwayatadmin');
     Route::get('/index', [HomeController::class, 'index'])->name('index');
