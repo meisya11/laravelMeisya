@@ -19,7 +19,8 @@
         </div>
         <section class="content">
             <div class="container-fluid">
-                <form action="{{ route('updateprofilepedagang', $profile->id) }}"method="POST" enctype="multipart/form-data">
+                <form action="{{ route('updateprofilepedagang', $profile->id) }}"method="POST"
+                    enctype="multipart/form-data">
                     @csrf
                     @method('PUT')
                     <div class="row">
@@ -82,15 +83,37 @@
                                             <input type="time" class="form-control" id="exampleInputEmail1"
                                                 name="sampai" value="{{ $profile->sampai }}" placeholder="">
                                         </div>
-                                        <div class="form-group">
+                                        <div class="mb-3">
                                             <label for="exampleInputEmail1">Kategori Toko</label>
-                                            <input type="text" class="form-control" id="exampleInputkategori1"
-                                                name="kategori" value="{{ $profile->kategori }}" placeholder="">
+                                            <select class="custom-select" name="kategori">
+                                                <option value="Bahan Mentah"
+                                                    {{ old('kategori') == 'Bahan Mentah' ? 'selected' : '' }}>
+                                                    Bahan Mentah</option>
+                                                <option value="Makanan"
+                                                    {{ old('kategori') == 'Makanan' ? 'selected' : '' }}>
+                                                    Makanan
+                                                </option>
+                                                <option value="Minuman"
+                                                    {{ old('kategori') == 'Minuman' ? 'selected' : '' }}>
+                                                    Minuman
+                                                </option>
+                                                <option value="Jasa" {{ old('kategori') == 'Jasa' ? 'selected' : '' }}>
+                                                    Jasa</option>
+                                                <option value="Perabotan"
+                                                    {{ old('kategori') == 'Perabotan' ? 'selected' : '' }}>
+                                                    Perabotan
+                                                </option>
+                                                <option value="Mainan" {{ old('kategori') == 'Mainan' ? 'selected' : '' }}>
+                                                    Mainan</option>
+                                                <option value="Lainnya" {{ old('kategori') == 'Lainnya' ? 'selected' : '' }}>
+                                                    Lainnya</option>
+                                            </select>
                                         </div>
                                         <div class="form-group">
                                             <label for="exampleInputPassword1">Password</label>
                                             <input type="password" name="password" class="form-control"
-                                                id="exampleInputPassword1" placeholder=" Harus Memasukkan Password Lama/Baru">
+                                                id="exampleInputPassword1"
+                                                placeholder=" Harus Memasukkan Password Lama/Baru">
                                         </div>
                                     </div>
                                     <div class="card-footer">

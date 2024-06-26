@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Monitoring;
+use App\Models\Pesanan;
 use App\Models\Profile;
 use App\Models\User;
 use App\Models\Route;
@@ -22,8 +22,10 @@ class HomeController extends Controller
                 $rute = Route::get();
                 return view('admin.dashboard', compact('pedagang', 'rute'));
             } elseif ($role == 'pedagang') {
+                $pembeli = User::where('role', 'pembeli')->whereNotNull('lokasi')->get();
+                $pesanan = Pesanan::with('detail')->where('status', 'waiting')->get();
 
-                return view('pedagang.dashboard');
+                return view('pedagang.dashboard', compact('pembeli', 'pesanan'));
             } elseif ($role == 'pembeli') {
 
                 $pedagang = User::where('role', 'pedagang')->whereNotNull('lokasi')->get();
@@ -80,7 +82,6 @@ class HomeController extends Controller
 
     public function updateadmin(Request $request, $id)
     {
-        // dd($request->all());
 
         $data = User::where('id', $id)->firstOrFail();
 
@@ -144,7 +145,7 @@ class HomeController extends Controller
         $profile = Profile::find($id);
         $data = Route::get();
 
-        return view('component.detail_pedagang', compact('user','profile', 'data'));
+        return view('component.detail_pedagang', compact('user', 'profile', 'data'));
     }
     function approveRoute($id)
     {

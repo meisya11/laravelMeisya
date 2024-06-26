@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Pesanan;
 use App\Models\Profile;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -39,14 +40,14 @@ class LoginController extends Controller
 
             if ($user->status == 'approved') {
                 if ($user->role == 'admin') {
-
                     $pedagang = User::where('role', 'pedagang')->whereNotNull('lokasi')->get();
                     $rute = Route::get();
-                    $count = User::where('id')->count();
-
-                    return redirect()->route('dashboard', compact('pedagang', 'rute', 'count'));
+                    return view('admin.dashboard', compact('pedagang', 'rute'));
                 } elseif ($user->role == 'pedagang') {
-                    return redirect()->route('dashboardpedagang');
+                    $pembeli = User::where('role', 'pembeli')->whereNotNull('lokasi')->get();
+                    $pesanan = Pesanan::with('detail')->where('status', 'waiting')->get();
+                    // dd($pesanan);
+                    return view('pedagang.dashboard', compact('pembeli', 'pesanan'));
                 } elseif ($user->role == 'pembeli') {
 
                     $pedagang = User::where('role', 'pedagang')->get();

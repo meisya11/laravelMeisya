@@ -28,7 +28,6 @@
                                 <div class="card-header">
                                     <h3 class="card-title">Form Tambah Data Produk</h3>
                                 </div>
-
                                 <div class="card-body">
                                     <div class="form-group">
                                         <label for="exampleInputEmail1">Nama Produk</label>
@@ -38,8 +37,9 @@
                                             <small>{{ $message }}</small>
                                         @enderror
                                     </div>
-                                    <label for="number">Masukkan Jumlah Produk:</label>
-                                    <input type="number" id="number" class="form-control" name="jumlah" required>
+                                    <label for="number">Jumlah Produk</label>
+                                    <input type="number" id="number" class="form-control"
+                                        placeholder="Masukkan Jumlah Produk" name="jumlah" required>
                                     <script>
                                         function add() {
                                             var numberInput = document.getElementById("number");
@@ -53,7 +53,6 @@
                                             numberInput.value = currentValue - 1;
                                         }
                                     </script>
-
                                     <div class="form-group">
                                         <label for="exampleInputEmail1">Detail Produk</label>
                                         <input type="text" class="form-control" id="exampleInputEmail1"
@@ -63,15 +62,16 @@
                                         <label for="exampleInputEmail1">Harga Produk</label>
                                         <input type="text" class="form-control" id="exampleInputEmail1"
                                             name="harga"placeholder="Masukkan Harga Produk">
+                                    </div>
                                     <div class="card-footer">
                                         <button type="submit" class="btn btn-primary">Submit</button>
                                     </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </form>
             </div>
-            <!-- /.card -->
-    </div>
-    <!--/.col (left) -->
-    </div><!-- /.container-fluid -->
-    </section>
+        </section>
     </div>
 @endsection

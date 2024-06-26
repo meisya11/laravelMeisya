@@ -5,7 +5,6 @@
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-body" id="detailPedagangBody">
-
                 </div>
             </div>
         </div>
@@ -109,6 +108,7 @@
                 maximumAge: 0,
             };
             navigator.geolocation.watchPosition(success, error, options);
+
             function success(pos) {
                 const lat = pos.coords.latitude;
                 const lng = pos.coords.longitude;
@@ -125,6 +125,18 @@
                 marker = L.marker([lat, lng], {
                     icon: greenIcon,
                 }).addTo(map);
+
+                var lokasi = [lat, lng];
+                $.ajax({
+                    type: "get",
+                    url: "{{ route('updatelokasi') }}",
+                    data: {
+                        lokasi: JSON.stringify(lokasi)
+                    },
+                    success: function(response) {
+                        console.log(response);
+                    }
+                });
             }
 
             function error(err) {
@@ -141,8 +153,7 @@
                     icon: L.divIcon({
                         className: 'custom-div-icon',
                         html: "<div style='font-size:12px' class='badge badge-success badge-pill'>🚎 <b>" +
-                            x
-                            .name +
+                            x.name +
                             "</b></div>",
                         iconSize: [25, 41],
                         popupAnchor: [1, -34],
@@ -154,6 +165,7 @@
                 locations = L.layerGroup(lokasi);
                 map.addLayer(locations)
             }
+
 
             function updatelokasi() {
                 $.ajax({

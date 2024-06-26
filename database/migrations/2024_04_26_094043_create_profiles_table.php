@@ -17,7 +17,10 @@ return new class extends Migration
             $table->string('email')->unique()->nullable();
             $table->string('phone')->nullable();
             $table->enum('role', ['admin', 'pedagang', 'pembeli'])->default('pembeli');
-            // $table->string('foto_profil')->nullable();
+            $table->string('deskripsi')->nullable();
+            $table->time('jam')->nullable();
+            $table->time('sampai')->nullable();
+            $table->enum('kategori', ['Bahan Mentah', 'Makanan', 'Jasa', 'Perabotan', 'Mainan', 'Minuman', 'Lainnya'])->default('Lainnya');
             $table->timestamps();
         });
     }

@@ -81,8 +81,8 @@
                     <li class="user-panel d-flex">
                         <div class="image">
                             <a href="{{ route('profilePembeli') }}">
-                            <img src="{{ asset('images/golinglogo.png') }}" class="brand-image img-circle elevation-3"
-                                style="opacity: .8">
+                                <img src="{{ asset('images/golinglogo.png') }}"
+                                    class="brand-image img-circle elevation-3" style="opacity: .8">
                             </a>
                         </div>
                 @endif
@@ -171,12 +171,20 @@
                                     <p>Rute</p>
                                 </a>
                             </li>
-                            <li class="nav-item">
-                                <a href="{{ route('riwayatpedagang') }}" class="nav-link">
-                                    <iconify-icon icon="tabler:checkup-list"></iconify-icon>
-                                    <p>Riwayat</p>
-                                </a>
-                            </li>
+                            <ul>
+                                <li class="nav-item">
+                                    <a href="{{ route('riwayatpedagang') }}" class="nav-link">
+                                        <iconify-icon icon="tabler:checkup-list"></iconify-icon>
+                                        <p>Riwayat Rute</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="{{ route('riwayatpesanan') }}" class="nav-link">
+                                        <iconify-icon icon="tabler:checkup-list"></iconify-icon>
+                                        <p>Riwayat Pesanan</p>
+                                    </a>
+                                </li>
+                            </ul>
                             <li class="nav-item">
                                 <a href="{{ route('logout') }}" class="nav-link">
                                     <i class="fa-solid fa-right-from-bracket"></i>
@@ -197,6 +205,18 @@
                                     <p>
                                         Dashboard
                                     </p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{{ route('buatpesanan') }}" class="nav-link">
+                                    <iconify-icon icon="tabler:checkup-list"></iconify-icon>
+                                    <p>Pesanan</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{{ route('riwayatpembeli') }}" class="nav-link">
+                                    <iconify-icon icon="tabler:checkup-list"></iconify-icon>
+                                    <p>Riwayat Pesanan</p>
                                 </a>
                             </li>
                             <li class="nav-item">

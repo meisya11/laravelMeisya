@@ -22,8 +22,8 @@
 <div class="container">
     <div class="d-flex align-items-center">
         <h1 class="mb-0 mr-3">{{ $user->name }}</h1>
-        <div>
-            <a href="https://wa.me/{{ $user->phone }}">📱 Hubungi Saya</a>
+        <div style="display: flex; align-items: center;">
+            <a href="https://wa.me/{{ $user->phone }}" style="margin-right: 10px;">📱 Hubungi Saya</a>
         </div>
     </div>
     <ul>

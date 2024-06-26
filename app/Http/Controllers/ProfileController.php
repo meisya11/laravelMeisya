@@ -84,7 +84,7 @@ class ProfileController extends Controller
             'deskripsi' => 'nullable|string|max:255',
             'jam' => 'nullable',
             'sampai' => 'nullable',
-            'kategori' => 'nullable|string|max:50',
+            'kategori' => 'nullable',
         ]);
         // dd($request->all());
         // Lakukan pembaruan data berdasarkan data yang dikirimkan melalui request

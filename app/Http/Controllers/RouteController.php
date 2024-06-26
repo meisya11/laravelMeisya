@@ -37,8 +37,7 @@ class RouteController extends Controller
                 'message' => 'Rute berhasil ditambahkan!',
                 'id' => $saveid->id,
             ]);
-        }
-        ;
+        };
         // dd($request->all());
     }
 

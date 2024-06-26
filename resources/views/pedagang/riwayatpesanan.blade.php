@@ -1,13 +1,5 @@
 @extends('layout.main')
 @section('content')
-    <div class="modal fade" id="detailPedagang" tabindex="-1" aria-labelledby="detailPedagangLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-body" id="detailPedagangBody">
-                </div>
-            </div>
-        </div>
-    </div>
     <div class="content-wrapper">
         <div class="content-header">
             <div class="container-fluid">
@@ -42,7 +34,6 @@
                                             <th>Alamat Antar</th>
                                             <th>Tanggal Pemesanan</th>
                                             <th>Status Pesanan</th>
-                                            <th>Pedagang</th>
                                             <th>Lokasi</th>
                                         </tr>
                                     </thead>
@@ -60,16 +51,6 @@
                                                 <td>{{ $d->alamat }}</td>
                                                 <td>{{ $d->created_at }}</td>
                                                 <td>{{ $d->status }}</td>
-                                                @if ($d->status == 'waiting')
-                                                    {
-                                                    <td>-</td>
-                                                    }
-                                                @else{
-                                                    <td><button class="btn btn-info"
-                                                            onclick="showDetail('{{ $d->pedagang_id }}')">{{ $d->pesananpedagang->name }}</button>
-                                                    </td>
-                                                    }
-                                                @endif
                                                 <td>
                                                     <a href="{{ route('detailantar', ['id' => $d->id]) }}"
                                                         class="btn btn-info"><i class="fas fa-map-marker-alt"></i>
@@ -87,15 +68,3 @@
         </section>
     </div>
 @endsection
-<script>
-    function showDetail(id) {
-        $('#detailPedagang').modal('show');
-        $.ajax({
-            url: "/detailpedagang/" + id,
-            method: 'GET',
-            success: function(res) {
-                $('#detailPedagangBody').html(res);
-            }
-        })
-    }
-</script>

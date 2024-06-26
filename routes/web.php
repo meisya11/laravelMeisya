@@ -55,7 +55,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('/reject-user/{user}', [HomeController::class, 'rejectUser'])->name('reject-user');
     Route::post('/approve-rute/{user}', [HomeController::class, 'approveRoute'])->name('approve-route');
     Route::post('/reject-rute/{user}', [HomeController::class, 'rejectRoute'])->name('reject-route');
-    // Route::get('/locations', [HomeController::class, 'locations'])->name('locations');
+    Route::get('/locations', [HomeController::class, 'locations'])->name('locations');
 
 
     //PEMBELI//
@@ -66,8 +66,14 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/profilePembeli', [ProfileController::class, 'profilePembeli'])->name('profilePembeli');
     Route::get('/editprofilpembeli/{id}', [ProfileController::class, 'editprofilpembeli'])->name('editprofilpembeli');
     Route::put('/updateProfilepembeli/{id}', [ProfileController::class, 'updateProfilepembeli'])->name('updateProfilepembeli');
-    Route::get('/locations', [HomeController::class, 'locations'])->name('locations');
+    Route::get('/location', [PembeliController::class, 'location'])->name('location');
     Route::get('/rute', [PedagangController::class, 'rute'])->name('rute');
+    Route::get('/updatelokasi', [HomeController::class, 'updatelokasi'])->name('updatelokasi');
+    Route::get('/riwayatpembeli', [PembeliController::class, 'riwayatpembeli'])->name('riwayatpembeli');
+    Route::get('/buatpesanan', [PembeliController::class, 'buatpesanan'])->name('buatpesanan');
+    Route::post('/simpanpesanan', [PembeliController::class, 'simpanpesanan'])->name('simpanpesanan');
+    Route::get('/detailantar/{id}', [PembeliController::class, 'detailantar'])->name('detailantar');
+    Route::get('/orderan/{id}', [PembeliController::class, 'orderan'])->name('orderan');
 
 
     //PEDAGANG//
@@ -96,4 +102,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::put('/updateprofilepedagang/{id}', [ProfileController::class, 'updateprofilepedagang'])->name('updateprofilepedagang');
     Route::get('/updatelokasi', [HomeController::class, 'updatelokasi'])->name('updatelokasi');
     Route::get('/updatestatusrute/{id}', [RouteController::class, 'updatestatusrute'])->name('updatestatusrute');
+    Route::get('/detailpembeli/{id}', [PembeliController::class, 'detailpembeli'])->name('detailpembeli');
+    Route::post('/ambilpesanan/{id}', [PembeliController::class, 'approvePesanan'])->name('approvePesanan');
+    Route::get('/riwayatpesanan', [PembeliController::class, 'riwayatpesanan'])->name('riwayatpesanan');
 });

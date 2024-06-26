@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Pesanan;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -12,7 +13,7 @@ use Carbon\Carbon;
 
 class PedagangController extends Controller
 {
-    public function dashboardpedagang()
+    public function dashboardpembeli()
     {
         if (auth()->check()) {
             $role = auth()->user()->role;
@@ -21,7 +22,9 @@ class PedagangController extends Controller
                 $rute = Route::get();
                 return view('admin.dashboard', compact('pedagang', 'rute'));
             } elseif ($role == 'pedagang') {
-                return view('pedagang.dashboard');
+                $pembeli = User::where('role', 'pembeli')->whereNotNull('lokasi')->get();
+                $pesanan = Pesanan::with('detail')->where('status', 'waiting')->get();
+                return view('pedagang.dashboard', compact('pembeli', 'pesanan'));
             } elseif ($role == 'pembeli') {
 
                 $pedagang = User::where('role', 'pedagang')->whereNotNull('lokasi')->get();
@@ -87,12 +90,12 @@ class PedagangController extends Controller
     public function riwayatpedagang()
     {
         $data = Route::where('users', auth()->id())->get();
-        return view('pedagang.riwayat', compact ('data'));
+        return view('pedagang.riwayat', compact('data'));
     }
     public function kelola()
     {
         $data = Product::where('pedagang', auth()->id())->get();
-        return view('pedagang.kelola', compact ('data'));
+        return view('pedagang.kelola', compact('data'));
     }
 
 }

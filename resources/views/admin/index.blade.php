@@ -141,10 +141,8 @@
 @endsection
 <script>
     function updateStatus(id, status) {
-        // Menetapkan nilai status ke elemen input pada formulir
         document.querySelector(`#statusForm${id} select[name="status"]`).value = status;
 
-        // Mengirim formulir secara otomatis
         document.querySelector(`#statusForm${id}`).submit();
     }
 
@@ -163,7 +161,6 @@
             alert("Penolakan dibatalkan.");
         }
     }
-    Z
 
     function approveUser(userId) {
         $.ajax({
